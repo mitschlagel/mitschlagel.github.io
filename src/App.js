@@ -1,22 +1,27 @@
-import logo from './logo.svg';
+import headshot from './headshot.jpg';
+import headshotColor from './fullcolorheadshot.png'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <img src={headshot}
+            onMouseOver={e => e.currentTarget.src = headshotColor}
+            onMouseOut={e => e.currentTarget.src = headshot}
+            className="rounded"
+        />
+        <div className='text'>
+          <p>spencer jones</p>
+          <p>musician teacher engineer</p>
+          <p className="links">
+            <a href="https://www.instagram.com/mitschlagel/">instagram </a>
+            <a href="https://www.linkedin.com/in/spencer-jones-omaha/">linkedin</a>
+          </p>
+        </div>
+          
+        
+        
       </header>
     </div>
   );
