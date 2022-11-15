@@ -3,7 +3,9 @@ import headshotColor from './fullcolorheadshot.png'
 import './App.css';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
+import ReactGA from 'react-ga';
 
+ReactGA.initialize('G-P6NNXH3H9C');
 
 const musicianPopover = (
   <Popover id="popover-musician">
@@ -27,8 +29,7 @@ const engineerPopover = (
   <Popover id="popover-engineer">
     <Popover.Header as="h3">engineer</Popover.Header>
     <Popover.Body>
-      skills: ios swift swiftui react react-native <br />
-      education: cs50, aim code school, creighton university
+      ios swift swiftui react react-native
     </Popover.Body>
   </Popover>
 );
