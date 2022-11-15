@@ -40,3 +40,12 @@ a {
 a:hover {
   color: rgb(108, 192, 170);
 }
+
+span:hover {
+  color: rgb(234, 117, 79);
+  cursor: help;
+}
+
+.popoverMusican {
+  background-color: #2a363b;
+}
