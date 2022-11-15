@@ -61,13 +61,13 @@ function App() {
           <p>spencer jones</p>
           <p>
             <OverlayTrigger trigger="hover" placement="bottom-left" overlay={musicianPopover}>
-              <span onMouseOver={trackHover(this, "hover", "musician")}>musician </span>
+              <span onMouseOver={trackHover("jobs", "hover", "musician")}>musician </span>
             </OverlayTrigger>
             <OverlayTrigger trigger="hover" placement="bottom-left" overlay={teacherPopover}>
-              <span onMouseOver={trackHover(this, "hover", "teacher")}>teacher </span>
+              <span onMouseOver={trackHover("jobs", "hover", "teacher")}>teacher </span>
             </OverlayTrigger>
             <OverlayTrigger trigger="hover" placement="bottom-left" overlay={engineerPopover}>
-              <span onMouseOver={trackHover(this, "hover", "engineer")}>engineer </span>
+              <span onMouseOver={trackHover("jobs", "hover", "engineer")}>engineer </span>
             </OverlayTrigger>
           </p> 
           <p className="links">
