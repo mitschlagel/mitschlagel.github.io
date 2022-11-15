@@ -4,8 +4,10 @@ import './App.css';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import ReactGA from 'react-ga';
+import React from 'react';
 
 ReactGA.initialize('G-P6NNXH3H9C');
+
 
 const musicianPopover = (
   <Popover id="popover-musician">
@@ -34,6 +36,15 @@ const engineerPopover = (
   </Popover>
 );
 
+const trackHover = (category, action, label) => {
+  console.log("GA event:", category, ":", action, ":", label);
+  ReactGA.event({
+    category: category,
+    action: action,
+    label: label,
+  })
+}
+
 function App() {
   return (
     <div className="App">
@@ -50,13 +61,13 @@ function App() {
           <p>spencer jones</p>
           <p>
             <OverlayTrigger trigger="hover" placement="bottom-left" overlay={musicianPopover}>
-              <span>musician </span>
+              <span onMouseOver={trackHover(this, "hover", "musician")}>musician </span>
             </OverlayTrigger>
             <OverlayTrigger trigger="hover" placement="bottom-left" overlay={teacherPopover}>
-              <span>teacher </span>
+              <span onMouseOver={trackHover(this, "hover", "teacher")}>teacher </span>
             </OverlayTrigger>
             <OverlayTrigger trigger="hover" placement="bottom-left" overlay={engineerPopover}>
-              <span>engineer </span>
+              <span onMouseOver={trackHover(this, "hover", "engineer")}>engineer </span>
             </OverlayTrigger>
           </p> 
           <p className="links">
