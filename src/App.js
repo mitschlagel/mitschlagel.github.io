@@ -15,8 +15,8 @@ function App() {
           <p>spencer jones</p>
           <p>musician teacher engineer</p>
           <p className="links">
-            <a href="https://www.instagram.com/mitschlagel/">instagram </a>
-            <a href="https://www.linkedin.com/in/spencer-jones-omaha/">linkedin</a>
+            <a href="https://www.instagram.com/mitschlagel/" target="_blank" rel="noreferrer">instagram </a>
+            <a href="https://www.linkedin.com/in/spencer-jones-omaha/" target="_blank" rel="noreferrer">linkedin</a>
           </p>
         </div>
           
