@@ -4,17 +4,21 @@
   padding-top: 2%;
 }
 
-.App-header {
+.main {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  width: 500px;
-
+  width: 100%;
 }
+
 .rounded {
   border: 2px solid #2a363b;
   border-radius: 50%;
-  width: 150px; 
+  width: 150px;
+}
+
+.img_wrapper {
+  padding-right: 16px;
 }
 
 
@@ -25,7 +29,6 @@
   color: #2a363b;
   font-weight: bold;
   font-size: larger;
-  padding-left: 16px;
 }
 
 a {
@@ -36,4 +39,13 @@ a {
 
 a:hover {
   color: rgb(108, 192, 170);
+}
+
+span:hover {
+  color: rgb(234, 117, 79);
+  cursor: help;
+}
+
+.popoverMusican {
+  background-color: #2a363b;
 }
