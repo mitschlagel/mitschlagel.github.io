@@ -5,9 +5,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import ReactGA from 'react-ga';
 import React from 'react';
-
-ReactGA.initialize('G-P6NNXH3H9C');
-
+import useAnalyticsEventTracker from './useAnalyticsEventTracker';
 
 const musicianPopover = (
   <Popover id="popover-musician">
@@ -46,6 +44,9 @@ const trackHover = (category, action, label) => {
 }
 
 function App() {
+
+  ReactGA.initialize('G-P6NNXH3H9C');
+
   return (
     <div className="App">
       <div className="main">
@@ -60,14 +61,14 @@ function App() {
         <div className='text'>
           <p>spencer jones</p>
           <p>
-            <OverlayTrigger trigger="hover" placement="bottom-left" overlay={musicianPopover}>
-              <span onMouseOver={trackHover("jobs", "hover", "musician")}>musician </span>
+            <OverlayTrigger placement="bottom-left" overlay={musicianPopover}>
+              <span onMouseOver={()=>trackHover("jobs", "hover", "musician")}>musician </span>
             </OverlayTrigger>
-            <OverlayTrigger trigger="hover" placement="bottom-left" overlay={teacherPopover}>
-              <span onMouseOver={trackHover("jobs", "hover", "teacher")}>teacher </span>
+            <OverlayTrigger placement="bottom-left" overlay={teacherPopover}>
+              <span onMouseOver={()=>trackHover("jobs", "hover", "teacher")}>teacher </span>
             </OverlayTrigger>
-            <OverlayTrigger trigger="hover" placement="bottom-left" overlay={engineerPopover}>
-              <span onMouseOver={trackHover("jobs", "hover", "engineer")}>engineer </span>
+            <OverlayTrigger placement="bottom-left" overlay={engineerPopover}>
+              <span onMouseOver={()=>trackHover("jobs", "hover", "engineer")}>engineer </span>
             </OverlayTrigger>
           </p> 
           <p className="links">
