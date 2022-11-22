@@ -7,41 +7,41 @@ import ReactGA from 'react-ga';
 import React from 'react';
 import useAnalyticsEventTracker from './useAnalyticsEventTracker';
 
-const musicianPopover = (
-  <Popover id="popover-musician">
-    <Popover.Header as="h3">musician</Popover.Header>
-    <Popover.Body>
-      extra percussion and timpani, omaha symphony
-    </Popover.Body>
-  </Popover>
-);
+// const musicianPopover = (
+//   <Popover id="popover-musician">
+//     <Popover.Header as="h3">musician</Popover.Header>
+//     <Popover.Body>
+//       extra percussion and timpani, omaha symphony
+//     </Popover.Body>
+//   </Popover>
+// );
 
-const teacherPopover = (
-  <Popover id="popover-teacher">
-    <Popover.Header as="h3">teacher</Popover.Header>
-    <Popover.Body>
-      instructor of percussion, omaha conservatory of music
-    </Popover.Body>
-  </Popover>
-);
+// const teacherPopover = (
+//   <Popover id="popover-teacher">
+//     <Popover.Header as="h3">teacher</Popover.Header>
+//     <Popover.Body>
+//       instructor of percussion, omaha conservatory of music
+//     </Popover.Body>
+//   </Popover>
+// );
 
-const engineerPopover = (
-  <Popover id="popover-engineer">
-    <Popover.Header as="h3">engineer</Popover.Header>
-    <Popover.Body>
-      ios swift swiftui react react-native
-    </Popover.Body>
-  </Popover>
-);
+// const engineerPopover = (
+//   <Popover id="popover-engineer">
+//     <Popover.Header as="h3">engineer</Popover.Header>
+//     <Popover.Body>
+//       ios swift swiftui react react-native
+//     </Popover.Body>
+//   </Popover>
+// );
 
-const trackHover = (category, action, label) => {
-  console.log("GA event:", category, ":", action, ":", label);
-  ReactGA.event({
-    category: category,
-    action: action,
-    label: label,
-  })
-}
+// const trackHover = (category, action, label) => {
+//   console.log("GA event:", category, ":", action, ":", label);
+//   ReactGA.event({
+//     category: category,
+//     action: action,
+//     label: label,
+//   })
+// }
 
 function App() {
 
@@ -60,7 +60,7 @@ function App() {
         </div>
         <div className='text'>
           <p>spencer jones</p>
-          <p>
+          {/* <p>
             <OverlayTrigger placement="bottom-left" overlay={musicianPopover}>
               <span onMouseOver={()=>trackHover("jobs", "hover", "musician")}>musician </span>
             </OverlayTrigger>
@@ -70,7 +70,8 @@ function App() {
             <OverlayTrigger placement="bottom-left" overlay={engineerPopover}>
               <span onMouseOver={()=>trackHover("jobs", "hover", "engineer")}>engineer </span>
             </OverlayTrigger>
-          </p> 
+          </p>  */}
+          <p>musician teacher engineer</p>
           <p className="links">
             <a href="https://www.instagram.com/mitschlagel/" target="_blank" rel="noreferrer">instagram </a>
             <a href="https://www.linkedin.com/in/spencer-jones-omaha/" target="_blank" rel="noreferrer">linkedin</a>
