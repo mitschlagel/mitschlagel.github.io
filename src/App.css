@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 865px;
 }
 
 .main {
@@ -28,9 +29,15 @@ h1 {
 .headline {
   display: flex;
   align-items: center;
-  
+  font-size: large;
   font-family: 'Roboto Mono', sans-serif;
   font-weight: 500;
+}
+
+@media only screen and (max-width: 768px) {
+  .headline {
+    flex-direction: column-reverse;
+  }
 }
 
 .social-links {
