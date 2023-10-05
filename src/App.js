@@ -2,6 +2,7 @@ import headshot from './headshot.jpg';
 import github from './github.png';
 import instagram from './instagram.png';
 import headshotColor from './fullcolorheadshot.png'
+import { useState } from 'react';
 import './App.css';
 
 import ReactGA from 'react-ga';
@@ -13,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <Main />
-      <SocialLinks />
+      {/* <SocialLinks /> */}
     </div>
   )
 };
@@ -21,13 +22,28 @@ function App() {
 const Main = () => {
   return (
     <div className="main">
-      <header className="header">
+      <Title />
+      <Headline />
+      <PrimaryContent />
+      <SocialLinks />
+    </div>
+  )
+}
+
+const Title = () => {
+  return(
+    <header className="header">
         
         <h1>Spencer Jones </h1>
         <h2>Musician, Engineer, & Educator</h2>
 
       </header>
-      <section className="headline">
+  )
+}
+
+const Headline = () => {
+  return(
+    <section className="headline">
         <div className="big-text">
           <h1>{bigText}</h1>
         </div>
@@ -40,13 +56,18 @@ const Main = () => {
           />
         </div>
       </section>
-      <section className="text">
+  )
+  
+}
+
+const PrimaryContent = () => {
+  return (
+    <section className="text">
         <p>{text1}</p>
         {/* <p>{text2}</p> */}
         <p>{text3}</p>
         <p>{text4}</p>
       </section>
-    </div>
   )
 }
 
