@@ -2,8 +2,9 @@ import headshot from './headshot.jpg';
 import github from './github.png';
 import instagram from './instagram.png';
 import headshotColor from './fullcolorheadshot.png'
-import { useState } from 'react';
+
 import './App.css';
+import ContactForm from './ContactForm';
 
 import ReactGA from 'react-ga';
 import React from 'react';
@@ -14,7 +15,6 @@ function App() {
   return (
     <div className="App">
       <Main />
-      {/* <SocialLinks /> */}
     </div>
   )
 };
@@ -22,7 +22,7 @@ function App() {
 const Main = () => {
   return (
     <div className="main">
-      <Title />
+      <Header />
       <Headline />
       <PrimaryContent />
       <SocialLinks />
@@ -30,12 +30,17 @@ const Main = () => {
   )
 }
 
-const Title = () => {
+const Header = () => {
   return(
     <header className="header">
+        <div className="title">
+          <h1>Spencer Jones </h1>
+          <h2>Musician, Engineer, & Educator</h2>
+        </div>
+        {/* <div className="contact-us">
+          <ContactForm />
+        </div> */}
         
-        <h1>Spencer Jones </h1>
-        <h2>Musician, Engineer, & Educator</h2>
 
       </header>
   )
