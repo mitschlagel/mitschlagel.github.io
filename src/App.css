@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 865px;
 }
 
 .main {
@@ -16,8 +17,11 @@
 }
 
 .header {
+  display: flex;
   font-weight: 900;
   font-family: 'Roboto Mono', sans-serif;
+  font-size: x-large;
+  
 }
 
 h1 {
@@ -27,21 +31,36 @@ h1 {
 .headline {
   display: flex;
   align-items: center;
-  font-size: x-large;
+  font-size: large;
   font-family: 'Roboto Mono', sans-serif;
   font-weight: 500;
+}
+
+@media only screen and (max-width: 768px) {
+   .resume-buttons-container {
+    flex-direction: column;
+  }
+
+  .headline {
+    flex-direction: column-reverse;
+  }
+
+  .resume-buttons-container > *:not(:last-child) {
+    margin-bottom: 24px;
+  }
 }
 
 .social-links {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding-top: 32px;
+  justify-content: center;
+  padding-top: 24px;
+  
 }
 
 .instagram {
   width: 50px;
-  padding-right: 16px;
+  padding-right: 32px;
 }
 
 .github {
@@ -49,8 +68,8 @@ h1 {
 }
 .rounded {
   border: 2px solid #000;
-  border-radius: 50%;
-  width: 350px;
+  border-radius: 50% !important;
+  width: 250px;
 }
 
 .img_wrapper {
@@ -85,4 +104,44 @@ span:hover {
 
 .popoverMusican {
   background-color: #2a363b;
+}
+
+.resume {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 24px 0 24px 0;
+}
+
+.resume-buttons-container {
+  display: flex;
+  /* Ensure child components are in a row */
+}
+
+/* Add margin-right to create space between buttons */
+.resume-buttons-container > *:not(:last-child) {
+  margin-right: 24px;
+}
+
+.resume-button {
+  display: inline-block;
+  font-size: 32px;
+  font-family: 'Roboto Mono', sans-serif;
+  padding: 10px 20px;
+  border: 2px solid #2a363b;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.resume-button:hover {
+  color: #ffffff;
+  background-color: #2a363b; /* Darker shade of blue on hover */
+}
+
+.resume-button-label {
+  display: inline-block;
 }
