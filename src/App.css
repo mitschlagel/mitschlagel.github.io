@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;500;900&family=Roboto:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:wght@400;600&display=swap');
 
 .App {
   padding: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 865px;
+  max-width: 700px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .main {
@@ -16,29 +17,27 @@
   padding:  0, 5%, 0, 5%;
 }
 
-.header {
-  display: flex;
-  font-weight: 900;
-  font-family: 'Roboto Mono', sans-serif;
-  font-size: x-large;
-  
-}
-
-h1 {
-  padding-right: 32px;
-}
-
 .headline {
   display: flex;
   align-items: center;
-  font-size: large;
-  font-family: 'Roboto Mono', sans-serif;
-  font-weight: 500;
+  font-size: x-large;
+  font-family: "Roboto Slab";
+  font-weight: 600;
 }
+
+ .title {
+  font-weight: 400;
+  font-size: 72px;
+  font-family: "Roboto Slab";
+ }
 
 @media only screen and (max-width: 768px) {
    .resume-buttons-container {
     flex-direction: column;
+  }
+
+  .title {
+    font-size: 56px;
   }
 
   .headline {
@@ -83,7 +82,6 @@ h1 {
   align-items: flex-start;
   color: #2a363b;
   font-weight: 400;
-  font-family: 'Roboto Mono', monospace;
   line-height: 1.5;
 }
 
@@ -99,11 +97,7 @@ a:hover {
 
 span:hover {
   color: rgb(234, 117, 79);
-  cursor: help;
-}
-
-.popoverMusican {
-  background-color: #2a363b;
+  
 }
 
 .resume {
@@ -125,8 +119,8 @@ span:hover {
 
 .resume-button {
   display: inline-block;
-  font-size: 32px;
-  font-family: 'Roboto Mono', sans-serif;
+  font-size: 29px;
+  font-family: "Roboto Slab";
   padding: 10px 20px;
   border: 2px solid #2a363b;
   border-radius: 8px;
@@ -139,7 +133,8 @@ span:hover {
 
 .resume-button:hover {
   color: #ffffff;
-  background-color: #2a363b; /* Darker shade of blue on hover */
+  background-color: #2a363b;
+  cursor: help;
 }
 
 .resume-button-label {
