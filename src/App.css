@@ -37,8 +37,16 @@ h1 {
 }
 
 @media only screen and (max-width: 768px) {
+   .resume-buttons-container {
+    flex-direction: column;
+  }
+
   .headline {
     flex-direction: column-reverse;
+  }
+
+  .resume-buttons-container > *:not(:last-child) {
+    margin-bottom: 24px;
   }
 }
 
@@ -117,7 +125,7 @@ span:hover {
 
 .resume-button {
   display: inline-block;
-  font-size: 16px;
+  font-size: 32px;
   font-family: 'Roboto Mono', sans-serif;
   padding: 10px 20px;
   border: 2px solid #2a363b;
