@@ -5,7 +5,8 @@ import headshotColor from './fullcolorheadshot.png'
 import './App.css';
 
 import React from 'react';
-import FadeInModalButton from './FadeInModalButton';
+import FadeInModalButton from './SlideInDrawerButton';
+import SlideInDrawerButton from './SlideInDrawerButton';
 
 function App() {
 
@@ -24,7 +25,7 @@ const Main = () => {
       <Resume />
       <Headline />
       <PrimaryContent />
-      <Socialpnks />
+      <SocialLinks />
     </div>
   )
 }
@@ -72,15 +73,15 @@ const Resume = () => {
   return (
     <div className="resume">
       <div className="resume-buttons-container">
-        <FadeInModalButton title="Musician" content={<MusicianResume />} />
-        <FadeInModalButton title="Teacher" content={"Coming Soon"} />
-        <FadeInModalButton title="Software Engineer" content={"Coming Soon"} />
+        <SlideInDrawerButton title="Musician" content={<MusicianResume />} />
+        <SlideInDrawerButton title="Teacher" content={"Coming Soon"} />
+        <SlideInDrawerButton title="Software Engineer" content={"Coming Soon"} />
       </div>
     </div>
   )
 }
 
-const Socialpnks = () => {
+const SocialLinks = () => {
   return (
     <div className="social-pnks">
       <a href="https://www.instagram.com/mitschlagel" target="_blank" rel="noopener noreferrer">
@@ -96,7 +97,6 @@ const Socialpnks = () => {
 const MusicianResume = () => {
   return (
     <div className="musician-resume">
-      <h2>Musician</h2>
       <h3>Performance Experience</h3>
         <p>
           <b>Omaha Symphony: 2013 - present</b><br/>

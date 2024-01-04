@@ -27,8 +27,8 @@
 
  .title {
   font-weight: 400;
-  font-size: 72px;
-  font-family: "Roboto Slab";
+  font-size: 90px;
+  font-family: "Roboto";
  }
 
 @media only screen and (max-width: 768px) {
@@ -68,7 +68,7 @@
 .rounded {
   border: 2px solid #000;
   border-radius: 50% !important;
-  width: 250px;
+  width: 240px;
 }
 
 .img_wrapper {
@@ -117,26 +117,28 @@ span:hover {
   margin-right: 24px;
 }
 
-.resume-button {
-  display: inline-block;
-  font-size: 29px;
-  font-family: "Roboto Slab";
+.drawer-button {
+  display: flex;
+  font-size: 28px;
+  font-family: "Roboto";
+  color: #2a363b;
   padding: 10px 20px;
   border: 2px solid #2a363b;
   border-radius: 8px;
   cursor: pointer;
   outline: none;
   text-align: center;
+  align-items: center;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
-.resume-button:hover {
+.drawer-button:hover {
   color: #ffffff;
   background-color: #2a363b;
-  cursor: help;
+  cursor: pointer;
 }
 
-.resume-button-label {
+.drawer-button-label {
   display: inline-block;
 }
