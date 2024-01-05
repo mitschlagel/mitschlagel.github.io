@@ -30,7 +30,7 @@ const Drawer = ({ title, content, onClose }) => {
     <div className={`drawer-container ${isOpen ? 'open' : ''}`}>
       <div className="drawer-content" ref={drawerRef}>
         <div className="drawer-header">
-          <ChevronLeftIcon onClick={hideDrawer} fontSize="large" /> 
+          <ChevronLeftIcon style={{cursor: "pointer"}} onClick={hideDrawer} fontSize="large" /> 
           <h2>{title}</h2>
         </div>
         <p>{content}</p>
@@ -52,7 +52,7 @@ const SlideInDrawerButton = ({ title, content }) => {
 
   return (
     <div>
-      <button className="drawer-button" onClick={showDrawer}> <ChevronRightIcon fontSize='medium' /> {title}</button>
+      <button className="drawer-button" onClick={showDrawer}>{title}<ChevronRightIcon fontSize='large' /></button>
       {isDrawerOpen && <Drawer title={title} content={content} onClose={hideDrawer} />}
     </div>
   );

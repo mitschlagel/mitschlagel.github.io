@@ -34,18 +34,30 @@
 @media only screen and (max-width: 768px) {
    .resume-buttons-container {
     flex-direction: column;
+    align-items: baseline;
+  }
+
+  .main {
+    justify-content: center;
   }
 
   .title {
     font-size: 56px;
+    text-align: center;
   }
 
   .headline {
     flex-direction: column-reverse;
+    text-align: center;
   }
 
   .resume-buttons-container > *:not(:last-child) {
-    margin-bottom: 24px;
+    padding-bottom: 24px;
+    padding-right: 0;
+  }
+
+  .img_wrapper {
+    padding-left: 0;
   }
 }
 
@@ -101,37 +113,32 @@ span:hover {
   
 }
 
-.resume {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 24px 0 24px 0;
-}
-
 .resume-buttons-container {
   display: flex;
+  padding: 24px 0 24px 0;
+  justify-content: center;
   /* Ensure child components are in a row */
 }
 
-/* Add margin-right to create space between buttons */
+/* Add padding-right to create space between buttons */
 .resume-buttons-container > *:not(:last-child) {
-  margin-right: 24px;
+  padding-right: 32px;
 }
 
 .drawer-button {
   display: flex;
-  font-size: 28px;
+  align-items: center;
+  font-size: 20px;
   font-family: "Roboto";
+  font-weight: 600;
   color: #2a363b;
   padding: 10px 20px;
   border: 2px solid #2a363b;
   border-radius: 8px;
   cursor: pointer;
-  outline: none;
-  text-align: center;
-  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: "background-color" 0.3s ease;
 }
 
 .drawer-button:hover {
