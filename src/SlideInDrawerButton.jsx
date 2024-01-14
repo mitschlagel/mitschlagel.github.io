@@ -3,8 +3,9 @@ import './Drawer.css'; // Assuming you have CSS for drawer styles
 import './App.css'; // Assuming you have CSS for app styles
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 
-const Drawer = ({ title, content, onClose }) => {
+const Drawer = ({ content, onClose }) => {
   const [isOpen, setIsOpen] = useState(true);
   const drawerRef = useRef(null);
 
@@ -31,7 +32,7 @@ const Drawer = ({ title, content, onClose }) => {
       <div className="drawer-content" ref={drawerRef}>
         <div className="drawer-header">
           <ChevronLeftIcon style={{cursor: "pointer"}} onClick={hideDrawer} fontSize="large" /> 
-          <h2>{title}</h2>
+          <span>SPENCER JONES</span>
         </div>
         <p>{content}</p>
       </div>
@@ -39,7 +40,7 @@ const Drawer = ({ title, content, onClose }) => {
   );
 };
 
-const SlideInDrawerButton = ({ title, content }) => {
+export const SlideInDrawerButton = ({ title, content }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const showDrawer = () => {
@@ -53,9 +54,7 @@ const SlideInDrawerButton = ({ title, content }) => {
   return (
     <div>
       <button className="drawer-button" onClick={showDrawer}>{title}<ChevronRightIcon fontSize='large' /></button>
-      {isDrawerOpen && <Drawer title={title} content={content} onClose={hideDrawer} />}
+      {isDrawerOpen && <Drawer title={title} content={content} onClose={hideDrawer}/>}
     </div>
   );
 };
-
-export default SlideInDrawerButton;
