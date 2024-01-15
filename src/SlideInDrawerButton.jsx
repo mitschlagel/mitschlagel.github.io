@@ -3,7 +3,8 @@ import './Drawer.css'; // Assuming you have CSS for drawer styles
 import './App.css'; // Assuming you have CSS for app styles
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
+
+import useAnalyticsEventTracker from './useAnalyticsEventTracker';
 
 const Drawer = ({ content, onClose }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -30,8 +31,8 @@ const Drawer = ({ content, onClose }) => {
   return (
     <div className={`drawer-container ${isOpen ? 'open' : ''}`}>
       <div className="drawer-content" ref={drawerRef}>
-        <div className="drawer-header">
-          <ChevronLeftIcon style={{cursor: "pointer"}} onClick={hideDrawer} fontSize="large" /> 
+        <div className="drawer-header" onClick={hideDrawer} style={{cursor: "pointer"}}>
+          <ChevronLeftIcon fontSize="large" /> 
           <span>SPENCER JONES</span>
         </div>
         <p>{content}</p>
@@ -51,9 +52,14 @@ export const SlideInDrawerButton = ({ title, content }) => {
     setIsDrawerOpen(false);
   };
 
+  const useHandleClick = () => {
+    showDrawer()
+    useAnalyticsEventTracker(`${title}_resume_viewed`)
+  };
+
   return (
     <div>
-      <button className="drawer-button" onClick={showDrawer}>{title}<ChevronRightIcon fontSize='large' /></button>
+      <button className="drawer-button" onClick={useHandleClick}>{title}<ChevronRightIcon fontSize='large' /></button>
       {isDrawerOpen && <Drawer title={title} content={content} onClose={hideDrawer}/>}
     </div>
   );
