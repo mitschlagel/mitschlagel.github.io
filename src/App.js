@@ -17,7 +17,7 @@ import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import MusicNoteRoundedIcon from '@mui/icons-material/MusicNoteRounded';
 
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import useAnalyticsEventTracker from './useAnalyticsEventTracker';
 
 function App() {
@@ -105,19 +105,26 @@ const ResumeButtons = () => {
   )
 }
 
+const SocialLinkIcon = ({icon, url, title}) => {
+  const trackEvent = useAnalyticsEventTracker('social_link_clicks')
+
+  const handleClick = (title) => {
+    trackEvent(`${title} link clicked`, `${title} link clicked`)
+    return false
+  }
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer" >
+        <img src={icon} alt={title} className={title} onClick={() => handleClick(title)} />
+    </a>
+  )
+}
+
 const SocialLinks = () => {
   return (
     <div className="social-links">
-      <a href="https://www.instagram.com/mitschlagel" target="_blank" rel="noopener noreferrer" onClick={useAnalyticsEventTracker('instagram_link_clicked')}>
-        <img src={instagram} alt="Instagram" className='instagram'/>
-      </a>
-      <a href="https://www.linkedin.com/in/spencerljones" target="_blank" rel="noopener noreferrer" onClick={useAnalyticsEventTracker('linkedin_link_clicked')}>
-        <img src={linkedin} alt="Linkedin" className='linkedin'/>
-      </a>
-      <a href="https://github.com/mitschlagel" target="_blank" rel="noopener noreferrer" onClick={useAnalyticsEventTracker('github_link_clicked')}>
-        <img src={github} alt="GitHub" className="github"/>
-      </a>
-      
+      <SocialLinkIcon icon={instagram} url="https://www.instagram.com/mitschlagel" title="instagram"/>
+      <SocialLinkIcon icon={linkedin} url="https://www.linkedin.com/in/spencerljones" title="linkedin"/>
+      <SocialLinkIcon icon={github} url="https://github.com/mitschlagel" title="github" />      
     </div>
   );
 };
@@ -244,6 +251,14 @@ const MusicianResume = () => {
 }
 
 const TeachingResume = () => {
+
+  const trackEvent = useAnalyticsEventTracker('email_link_clicks')
+
+  const handleClick = () => {
+    trackEvent(`teaching email link clicked`, `teaching email link clicked`)
+    return false
+  }
+
   return (
     <div className='resume-section'>
       <h3>EDUCATOR</h3>
@@ -258,7 +273,7 @@ const TeachingResume = () => {
       
       <br />
       <br />
-      Spencer is always looking for hard-working, motivated students. To inquire about studying at University of Nebraska at Omaha, please contact him at <a href="mailto:spencerjones@unomaha.edu" onClick={useAnalyticsEventTracker('email_link_clicked')}>spencerjones@unomaha.edu</a>
+      Spencer is always looking for hard-working, motivated students. To inquire about studying at University of Nebraska at Omaha, please contact him at <a href="mailto:spencerjones@unomaha.edu" onClick={handleClick}>spencerjones@unomaha.edu</a>
 
       
       </div> 
