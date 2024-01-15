@@ -17,7 +17,7 @@ import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import MusicNoteRoundedIcon from '@mui/icons-material/MusicNoteRounded';
 
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import useAnalyticsEventTracker from './useAnalyticsEventTracker';
 
 function App() {
@@ -105,19 +105,26 @@ const ResumeButtons = () => {
   )
 }
 
+const SocialLinkIcon = ({icon, url, title}) => {
+  const trackEvent = useAnalyticsEventTracker('social_link_clicks')
+
+  const handleClick = (title) => {
+    trackEvent(`${title} link clicked`, `${title} link clicked`)
+    return false
+  }
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer" >
+        <img src={icon} alt={title} className={title} onClick={() => handleClick(title)} />
+    </a>
+  )
+}
+
 const SocialLinks = () => {
   return (
     <div className="social-links">
-      <a href="https://www.instagram.com/mitschlagel" target="_blank" rel="noopener noreferrer" onClick={useAnalyticsEventTracker('instagram_link_clicked')}>
-        <img src={instagram} alt="Instagram" className='instagram'/>
-      </a>
-      <a href="https://www.linkedin.com/in/spencerljones" target="_blank" rel="noopener noreferrer" onClick={useAnalyticsEventTracker('linkedin_link_clicked')}>
-        <img src={linkedin} alt="Linkedin" className='linkedin'/>
-      </a>
-      <a href="https://github.com/mitschlagel" target="_blank" rel="noopener noreferrer" onClick={useAnalyticsEventTracker('github_link_clicked')}>
-        <img src={github} alt="GitHub" className="github"/>
-      </a>
-      
+      <SocialLinkIcon icon={instagram} url="https://www.instagram.com/mitschlagel" title="instagram"/>
+      <SocialLinkIcon icon={linkedin} url="https://www.linkedin.com/in/spencerljones" title="linkedin"/>
+      <SocialLinkIcon icon={github} url="https://github.com/mitschlagel" title="github" />      
     </div>
   );
 };
@@ -244,6 +251,14 @@ const MusicianResume = () => {
 }
 
 const TeachingResume = () => {
+
+  const trackEvent = useAnalyticsEventTracker('email_link_clicks')
+
+  const handleClick = () => {
+    trackEvent(`teaching email link clicked`, `teaching email link clicked`)
+    return false
+  }
+
   return (
     <div className='resume-section'>
       <h3>EDUCATOR</h3>
@@ -258,7 +273,7 @@ const TeachingResume = () => {
       
       <br />
       <br />
-      Spencer is always looking for hard-working, motivated students. To inquire about studying at University of Nebraska at Omaha, please contact him at <a href="mailto:spencerjones@unomaha.edu" onClick={useAnalyticsEventTracker('email_link_clicked')}>spencerjones@unomaha.edu</a>
+      Spencer is always looking for hard-working, motivated students. To inquire about studying at University of Nebraska at Omaha, please contact him at <a href="mailto:spencerjones@unomaha.edu" onClick={handleClick}>spencerjones@unomaha.edu</a>
 
       
       </div> 
@@ -268,7 +283,7 @@ const TeachingResume = () => {
   
 
 export default App;
-const bigText = "Spencer is a versatile creative professional enjoying a multi-faceted career as a software engineer, orchestral musician, and educator."
+const bigText = "A versatile creative professional enjoying a multi-faceted career as a software engineer, orchestral musician, and educator."
 const text1 = "For more than a decade Spencer has served as a first-call percussionist and timpanist with the Omaha and Kansas City Symphonies. He has performed with the Grand Rapids Symphony, Indianapolis Symphony Orchestra, Hawaii Symphony Orchestra, and the New World Symphony of Miami Beach, FL. He is on the roster of the Omaha Chamber Music Society and is a co-founder of Omaha Percussion Group. He has accompanied a diverse range of artists, including Yo-Yo Ma, Lyle Lovett, Joyce DiDonato, Guster, Branford Marsalis, Ben Folds, and Bernadette Peters."
 const text2 = "Adept and driven, Spencer began his tech career with Harvard’s CS50 before enrolling in the computer science program at Creighton University. He is currently an iOS developer at FNBO, a banking and financial services company based in Omaha, NE, and the founder of Studio Assistant, a mobile app for managing collegiate music studios currently in development. An ardent proponent of delightful, simple, and accessible applications, he is proficient in native iOS development (SwiftUI + UIKit), React, and RESTful API practices, and is currently learning React Native and GraphQL."
 const text3 = "Spencer is adjunct professor of percussion at the University of Nebraska at Omaha and maintains a private studio of highly motivated high school students. From 2016-2021, Spencer directed percussion studies at Omaha Conservatory of Music, where he grew the percussion studio from zero to twenty students in five years. His students routinely placed in All-State ensembles, earned college scholarships, and won acceptance into prestigious programs such as Interlochen and Boston University-Tanglewood Institute. Additionally, Spencer has served on the faculties of Iowa Western Community College and Dordt University, as well as on the percussion staff of Broken Arrow (OK) High School’s The Pride of Broken Arrow marching band."

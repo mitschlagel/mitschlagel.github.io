@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:wght@400;600&display=swap');
 
+
 .App {
   padding: 2%;
   display: flex;
@@ -50,6 +51,7 @@
 
   .resume-buttons-container {
     flex-direction: column;
+    padding: 0 5% 0 5%;
   } 
 
   .resume-buttons-container > *:not(:last-child) {
@@ -81,7 +83,8 @@
   }
 
   .big-text {
-    text-align: center;
+    text-align:center;
+    padding: 0 5% 0 5%;
   }
 
 }
@@ -141,7 +144,7 @@ a {
 }
 
 .resume-buttons-container > *:not(:last-child) {
-  padding-right: 18px;
+  padding-right: 24px;
 }
 
 .resume-section {

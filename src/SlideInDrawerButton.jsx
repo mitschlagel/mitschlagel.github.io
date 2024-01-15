@@ -4,6 +4,7 @@ import './App.css'; // Assuming you have CSS for app styles
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
+import ReactGA from "react-ga4";
 import useAnalyticsEventTracker from './useAnalyticsEventTracker';
 
 const Drawer = ({ content, onClose }) => {
@@ -44,22 +45,19 @@ const Drawer = ({ content, onClose }) => {
 export const SlideInDrawerButton = ({ title, content }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const trackEvent = useAnalyticsEventTracker("resume_views")
   const showDrawer = () => {
     setIsDrawerOpen(true);
+    trackEvent(`${title} resume viewed`, `${title} resume viewed`)
   };
 
   const hideDrawer = () => {
     setIsDrawerOpen(false);
   };
 
-  const useHandleClick = () => {
-    showDrawer()
-    useAnalyticsEventTracker(`${title}_resume_viewed`)
-  };
-
   return (
     <div>
-      <button className="drawer-button" onClick={useHandleClick}>{title}<ChevronRightIcon fontSize='large' /></button>
+      <button className="drawer-button" onClick={showDrawer}>{title}<ChevronRightIcon fontSize='large' /></button>
       {isDrawerOpen && <Drawer title={title} content={content} onClose={hideDrawer}/>}
     </div>
   );
