@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './Drawer.css'; // Assuming you have CSS for drawer styles
-import './App.css'; // Assuming you have CSS for app styles
+
+import '../Drawer.css';
+import '../App.css'; 
+
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-import ReactGA from "react-ga4";
-import useAnalyticsEventTracker from './useAnalyticsEventTracker';
+import useAnalyticsEventTracker from '../hooks/useAnalyticsEventTracker';
 
 const Drawer = ({ content, onClose }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -42,7 +43,7 @@ const Drawer = ({ content, onClose }) => {
   );
 };
 
-export const SlideInDrawerButton = ({ title, content }) => {
+export const DrawerButton = ({ title, content }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const trackEvent = useAnalyticsEventTracker("resume_views")

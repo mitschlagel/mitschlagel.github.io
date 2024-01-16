@@ -19,11 +19,12 @@
   width: 100%;
 }
 
-.header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
+.title {
+  font-weight: 400;
+  font-size: 86px;
+  color: #266043;
+  text-align: center;
+ }
 
 .headline {
   display: flex;
@@ -39,12 +40,7 @@
   text-align: start;
 }
 
- .title {
-  font-weight: 400;
-  font-size: 86px;
-  color: #266043;
-  text-align: justify;
- }
+ 
 
 @media only screen and (max-width: 768px) {
 
