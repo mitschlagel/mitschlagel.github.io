@@ -1,20 +1,21 @@
+import "./App.css";
+import React from "react";
+import ReactGA from "react-ga4";
 
-
-import './App.css';
-import React from 'react';
-import ReactGA from 'react-ga4';
-
-import { Title, Headline, ResumeButtons, SocialLinks } from './components/MainComponents';
+import {
+  Headline,
+  ResumeButtons,
+  SocialLinks,
+} from "./components/MainComponents";
 
 function App() {
-
-  ReactGA.initialize('G-P6NNXH3H9C');
+  ReactGA.initialize("G-P6NNXH3H9C");
   return (
     <div className="App">
       <Main />
     </div>
-  )
-};
+  );
+}
 
 const Main = () => {
   return (
@@ -24,10 +25,7 @@ const Main = () => {
       <ResumeButtons />
       <SocialLinks />
     </div>
-  )
-}
+  );
+};
 
 export default App;
-
-
-

@@ -1,7 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
 
 .App {
   padding: 2%;
@@ -10,7 +7,7 @@
   align-items: center;
   justify-content: center;
   max-width: 700px;
-  font-family: 'Merriweather Sans', sans-serif;
+  font-family: "Merriweather Sans", sans-serif;
   font-weight: 300;
 }
 
@@ -26,7 +23,7 @@
   font-size: 5.65em;
   color: #266043;
   text-align: center;
- }
+}
 
 .headline {
   display: flex;
@@ -35,7 +32,6 @@
   font-size: 1.5em;
   font-weight: 400;
   font-family: "Merriweather Sans";
-  
 }
 
 .big-text {
@@ -44,11 +40,10 @@
 }
 
 @media only screen and (max-width: 768px) {
-
   .resume-buttons-container {
     flex-direction: column;
     padding: 0 5% 0 5%;
-  } 
+  }
 
   .resume-buttons-container > *:not(:last-child) {
     padding: 0 0 24px 0;
@@ -81,10 +76,9 @@
   }
 
   .big-text {
-    text-align:center;
+    text-align: center;
     padding: 16px 5% 0 5%;
   }
-
 }
 
 .social-links {
@@ -92,7 +86,7 @@
   justify-content: center;
   align-items: center;
   padding-top: 36px;
-  width: 100%
+  width: 100%;
 }
 
 .social-links > *:not(:last-child) {
@@ -173,4 +167,3 @@ a {
   background-color: #266043;
   cursor: pointer;
 }
-

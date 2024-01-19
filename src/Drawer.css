@@ -1,4 +1,4 @@
-@import './App.css';
+@import "./App.css";
 
 .drawer-container {
   position: fixed;
@@ -16,7 +16,7 @@
 }
 
 .drawer-container.open {
-  width: auto; 
+  width: auto;
   max-width: 816px;
 }
 
@@ -37,5 +37,3 @@
 .drawer-header-chevron {
   padding-right: 12px;
 }
-
-
