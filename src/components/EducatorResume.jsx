@@ -15,8 +15,8 @@ const EducatorResume = () => {
   
     return (
       <div className='resume-section'>
-        <h3>EDUCATOR</h3>
-        <span className='resume-section-title'><SchoolRoundedIcon className='resume-icon' /> Summary</span>
+        <div className="resume-title">EDUCATOR</div>
+        <div className='resume-section-title'><SchoolRoundedIcon className='resume-icon' /> Summary</div>
         Spencer is adjunct professor of percussion at the <a href="https://www.unomaha.edu/college-of-communication-fine-arts-and-media/music/about-us/area-pages/percussion-area.php">University of Nebraska at Omaha</a> and maintains a private studio of highly-motivated high schoolers.
         His students routinely advance in professional auditions, place in All-State ensembles, earn college scholarships and graduate assistantships, and win acceptance into prestigious programs such as Interlochen, Boston University-Tanglewood Institute, and Oberlin Summer Percussion Institute.
         Former students have attended elite music schools, such as the University of Southern California and Rice University, and have gone on to professional music careers, while others have pursued degrees in accouting, law, and engineering at top universities.

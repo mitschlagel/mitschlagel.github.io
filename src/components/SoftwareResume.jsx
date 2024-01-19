@@ -2,41 +2,37 @@ import React from "react";
 
 import {softwareSummaryText} from "../strings/Strings";
 
-import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
-import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
+import PersonIcon from "@mui/icons-material/Person";
+import WorkIcon from "@mui/icons-material/Work";
+import SchoolIcon from "@mui/icons-material/School";
 
 const SoftwareResume = () => {
     return (
       <div>
         
         <div className='resume-section'>
-        <h3>SOFTWARE ENGINEER</h3>
-        <span className='resume-section-title'><PersonRoundedIcon className='resume-icon' /> Summary</span>
-        
+        <div className="resume-title">SOFTWARE ENGINEER</div>
+        <div className='resume-section-title'><PersonIcon className='resume-icon' /> Summary</div>
         {softwareSummaryText}
-        
         </div>
         <div className='resume-section'>
-          <span className='resume-section-title'><WorkRoundedIcon className='resume-icon' /> Work Experience</span>
+          <div className='resume-section-title'><WorkIcon className='resume-icon' /> Work Experience</div>
           <div>
-            <span className='resume-subsection-title'><span>iOS Developer</span><span>First National Bank of Omaha {"(remote)"}</span><span>Jan 2022-present</span></span>
-            
+            <div className='resume-subsection-title'><span>iOS Developer</span><span>First National Bank of Omaha {"(remote)"}</span><span>Jan 2022-present</span></div>
+            <p>Member of an Agile development team working on a white-label Swift codebase shipping 19 different native iOS mobile banking and credit card apps connected to a mainframe through RESTful APIs.</p>
             <ul>
-              <li>Member of an Agile team developing a white-label native iOS Swift codebase for 19 different mobile banking and credit card apps.</li>
+              <li>Architected the conversion of the app’s two highest traffic features from UIKit and RxSwift to SwiftUI, reducing lines of code by 61%.</li>
               <li>Implemented mobile check capture and deposit feature in SwiftUI that processed $2.2 billion in customer deposits in 2023.</li>
               <li>Implemented a customer messaging feature that integrated a Salesforce SDK and has had {"\>"} 10 million impressions in first 60 days in production.</li>
-              <li>Architected the conversion of the app’s two highest traffic features from UIKit and RxSwift to SwiftUI, reducing lines of code by 61%.</li>
               <li>Created a SwiftUI component library, including helper methods to handle legacy features, shared between two development teams.</li>
               <li>Coordinated iOS meetings and processes, responsible for writing and maintaining documentation and leading meetings.</li>
               <li>Managed CI/CD pipelines to deliver monthly releases for 11 different mobile banking applications, coordinating with Product and QA.</li>
           </ul>
           </div>
           <div>
-            <span className='resume-subsection-title'><span>Software Engineering Intern</span><span>First National Bank of Omaha {"(remote)"}</span><span>April 2021-Dec 2021</span></span>
-            
+            <div className='resume-subsection-title'><span>Software Engineering Intern</span><span>First National Bank of Omaha {"(remote)"}</span><span>April 2021-Dec 2021</span></div>
+            <p>Member of an Agile development team building a modern web application using React and microfrontend architecture.</p>
             <ul>
-              <li>Member of an Agile development team building a modern web application using React and microfrontend architecture.</li>
               <li>Researched and developed a full-stack feature using React and Groovy to retrieve and display user credit card statements.</li>
               <li>Used React and Storybook to build components for a company-wide React component library.</li>
               <li>Used Postman and Swagger to design and test APIs.</li>
@@ -44,9 +40,9 @@ const SoftwareResume = () => {
           </div>
         </div>
         <div className='resume-section'>
-        <span className='resume-section-title'><SchoolRoundedIcon className='resume-icon' /> Education</span>
+        <div className='resume-section-title'><SchoolIcon className='resume-icon'/> Education</div>
         <div>
-            <span className='resume-subsection-title'><span>Creighton University</span><span>Studies in Computer Science</span><span>Aug 2020-Jan 2022</span></span>
+            <div className='resume-subsection-title'><span>Creighton University</span><span>Studies in Computer Science</span><span>Aug 2020-Jan 2022</span></div>
             
             <ul>
               <li>18 credit hours of undergraduate CS courses: Python, Java, Object-Oriented Programming, Data Structures, Computer

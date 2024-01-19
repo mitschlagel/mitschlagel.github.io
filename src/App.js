@@ -19,7 +19,7 @@ function App() {
 const Main = () => {
   return (
     <div className="main">
-      <Title />
+      {/* <Title /> */}
       <Headline />
       <ResumeButtons />
       <SocialLinks />

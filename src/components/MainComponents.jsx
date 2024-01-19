@@ -12,34 +12,34 @@ import headshotColor from '../images/fullcolorheadshot.png'
 import { headlineText } from "../strings/Strings";
 
 import { DrawerButton } from "./DrawerButtons";
-import SocialLinkIcon from "./SocialLinkIcon";
+
 import SoftwareResume from "./SoftwareResume";
 import MusicianResume from "./MusicianResume";
 import EducatorResume from "./EducatorResume";
 
-export const Title = () => {
-    return(
-      <header className="title">
-        SPENCER JONES
-      </header>
-   )
-}
+import { SocialIcon } from "react-social-icons";
 
 export const Headline = () => {
   return(
-    <div className="headline">
-        <div className="big-text">
-         {headlineText}
-        </div>
-        <div className="img_wrapper">
-          <img src={headshot}
-            onMouseOver={e => e.currentTarget.src = headshotColor}
-            onMouseOut={e => e.currentTarget.src = headshot}
-            className="rounded"
-            alt="Spencer with sunglasses"
-          />
-        </div>
+    <div>
+      <div className="title">
+        <span>SPENCER JONES</span>
       </div>
+      <div className="headline">
+          <div className="big-text">
+          {headlineText}
+          </div>
+          <div className="img_wrapper">
+            <img src={headshot}
+              onMouseOver={e => e.currentTarget.src = headshotColor}
+              onMouseOut={e => e.currentTarget.src = headshot}
+              className="rounded"
+              alt="Spencer with sunglasses"
+            />
+          </div>
+        </div>
+    </div>
+    
   ) 
 }
 
@@ -58,9 +58,10 @@ export const ResumeButtons = () => {
 export const SocialLinks = () => {
   return (
     <div className="social-links">
-      <SocialLinkIcon icon={instagramIcon} url="https://www.instagram.com/mitschlagel" title="instagram"/>
-      <SocialLinkIcon icon={linkedinIcon} url="https://www.linkedin.com/in/spencerljones" title="linkedin"/>
-      <SocialLinkIcon icon={githubIcon} url="https://github.com/mitschlagel" title="github" />      
+      <SocialIcon url="https://www.instagram.com/mitschlagel" bgColor="#266043" />
+      <SocialIcon url="https://www.linkedin.com/in/spencerljones" bgColor="#266043"/>
+      <SocialIcon url="https://github.com/mitschlagel" bgColor="#266043"/>
+      <SocialIcon url="mailto:spencerjonesstudio@gmail.com" bgColor="#266043"/>
     </div>
   );
 };
