@@ -25,6 +25,15 @@
   font-family: "Merriweather Sans";
 }
 
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin: 0;
+  padding-left: 8px;
+}
+
 .drawer-header {
   display: flex;
   align-items: center;

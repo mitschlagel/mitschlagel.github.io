@@ -20,7 +20,6 @@ function App() {
 const Main = () => {
   return (
     <div className="main">
-      {/* <Title /> */}
       <Headline />
       <ResumeButtons />
       <SocialLinks />

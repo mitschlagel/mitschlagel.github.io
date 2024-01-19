@@ -28,9 +28,9 @@ const SoftwareResume = () => {
           Work Experience
         </div>
         <div>
-          <div className="resume-subsection-title">
+          <div className="resume-subsection-title" id="software-job">
             <span>iOS Developer</span>
-            <span>First National Bank of Omaha {"(remote)"}</span>
+            <span>First National Bank of Omaha</span>
             <span>Jan 2022-present</span>
           </div>
           <p>
@@ -69,9 +69,9 @@ const SoftwareResume = () => {
           </ul>
         </div>
         <div>
-          <div className="resume-subsection-title">
+          <div className="resume-subsection-title" id="software-job">
             <span>Software Engineering Intern</span>
-            <span>First National Bank of Omaha {"(remote)"}</span>
+            <span>First National Bank of Omaha</span>
             <span>April 2021-Dec 2021</span>
           </div>
           <p>
@@ -100,7 +100,7 @@ const SoftwareResume = () => {
           Education
         </div>
         <div>
-          <div className="resume-subsection-title">
+          <div className="resume-subsection-title" id="software-job">
             <span>Creighton University</span>
             <span>Studies in Computer Science</span>
             <span>Aug 2020-Jan 2022</span>
@@ -117,7 +117,7 @@ const SoftwareResume = () => {
         </div>
 
         <div>
-          <span className="resume-subsection-title">
+          <span className="resume-subsection-title" id="software-job">
             <span>AIM Code School</span>
             <span>Foundations of Web Development</span>
             <span>Jan 2021-Feb 2021</span>
@@ -132,7 +132,7 @@ const SoftwareResume = () => {
         </div>
 
         <div>
-          <span className="resume-subsection-title">
+          <span className="resume-subsection-title" id="software-job">
             <span>CS50: Introduction to Computer Science</span>
             <span>Summer 2020</span>
           </span>
