@@ -1,3 +1,5 @@
+@import "./App.css";
+
 .drawer-container {
   position: fixed;
   text-align: left;
@@ -5,31 +7,33 @@
   top: 0;
   left: 0;
   height: 100%;
-  width: 0; /* Initially collapsed */
-  background-color: rgba(255, 255, 255, 0.8); /* Adjust opacity for translucency */
-  backdrop-filter: blur(5px); /* Apply backdrop blur */
-  transition: transform 0.3s ease-out; /* Transition for sliding animation */
-  transform: translateX(0); /* Initially off-screen */
-  overflow-x: hidden; /* Hide horizontal overflow */
+  width: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(0);
+  overflow-x: hidden;
 }
 
 .drawer-container.open {
-  width: auto; /* Set the width to show the drawer content */
+  width: auto;
   max-width: 816px;
 }
 
 .drawer-content {
   padding: 20px;
-  /* Add any specific styles for the content within the drawer */
+  font-family: "Merriweather Sans";
 }
 
 .drawer-header {
   display: flex;
   align-items: center;
-  font-family: "Roboto Slab";
+  font-family: "Merriweather Sans";
   color: #266043;
-  font-size: x-large;
+  font-size: 1.8em;
   font-weight: 600;
 }
 
-
+.drawer-header-chevron {
+  padding-right: 12px;
+}
