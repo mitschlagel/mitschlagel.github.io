@@ -89,13 +89,14 @@
 
 .social-links {
   display: flex;
-  align-items: space-between;
-  padding-top: 28px;
-  z-index: -999;
+  justify-content: center;
+  align-items: center;
+  padding-top: 36px;
+  width: 100%
 }
 
 .social-links > *:not(:last-child) {
-  margin-right: 16px;
+  margin-right: 24px;
 }
 
 .rounded {
@@ -145,7 +146,7 @@ a {
 }
 
 .resume-icon {
-  padding-right: 16px;
+  padding-right: 12px;
 }
 
 .drawer-button {
@@ -161,6 +162,10 @@ a {
   border-radius: 8px;
   cursor: pointer;
   transition: "background-color" 0.3s ease;
+}
+
+.drawer-button-chevron {
+  padding-left: 12px;
 }
 
 .drawer-button:hover {

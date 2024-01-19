@@ -3,8 +3,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import '../Drawer.css';
 import '../App.css'; 
 
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { icon } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 import useAnalyticsEventTracker from '../hooks/useAnalyticsEventTracker';
 
@@ -34,7 +34,7 @@ const Drawer = ({ content, onClose }) => {
     <div className={`drawer-container ${isOpen ? 'open' : ''}`}>
       <div className="drawer-content" ref={drawerRef}>
         <div className="drawer-header" onClick={hideDrawer} style={{cursor: "pointer"}}>
-          <ChevronLeftIcon fontSize="large" /> 
+        <FontAwesomeIcon icon={icon({name: 'chevron-left'})} className="drawer-header-chevron" />
           <span>SPENCER JONES</span>
         </div>
         <p>{content}</p>
@@ -58,7 +58,7 @@ export const DrawerButton = ({ title, content }) => {
 
   return (
     <div>
-      <button className="drawer-button" onClick={showDrawer}>{title}<ChevronRightIcon fontSize='large' /></button>
+      <button className="drawer-button" onClick={showDrawer}>{title}<FontAwesomeIcon icon={icon({name: 'chevron-right'})} className='drawer-button-chevron' /></button>
       {isDrawerOpen && <Drawer title={title} content={content} onClose={hideDrawer}/>}
     </div>
   );

@@ -2,9 +2,8 @@ import React from "react";
 
 import {softwareSummaryText} from "../strings/Strings";
 
-import PersonIcon from "@mui/icons-material/Person";
-import WorkIcon from "@mui/icons-material/Work";
-import SchoolIcon from "@mui/icons-material/School";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { icon } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 const SoftwareResume = () => {
     return (
@@ -12,11 +11,11 @@ const SoftwareResume = () => {
         
         <div className='resume-section'>
         <div className="resume-title">SOFTWARE ENGINEER</div>
-        <div className='resume-section-title'><PersonIcon className='resume-icon' /> Summary</div>
+        <div className='resume-section-title'><FontAwesomeIcon icon={icon({name: 'id-card'})} className="resume-icon" />Summary</div>
         {softwareSummaryText}
         </div>
         <div className='resume-section'>
-          <div className='resume-section-title'><WorkIcon className='resume-icon' /> Work Experience</div>
+          <div className='resume-section-title'><FontAwesomeIcon icon={icon({name: 'code'})} className="resume-icon" />Work Experience</div>
           <div>
             <div className='resume-subsection-title'><span>iOS Developer</span><span>First National Bank of Omaha {"(remote)"}</span><span>Jan 2022-present</span></div>
             <p>Member of an Agile development team working on a white-label Swift codebase shipping 19 different native iOS mobile banking and credit card apps connected to a mainframe through RESTful APIs.</p>
@@ -40,7 +39,7 @@ const SoftwareResume = () => {
           </div>
         </div>
         <div className='resume-section'>
-        <div className='resume-section-title'><SchoolIcon className='resume-icon'/> Education</div>
+        <div className='resume-section-title'><FontAwesomeIcon icon={icon({name: 'graduation-cap'})} className="resume-icon" />Education</div>
         <div>
             <div className='resume-subsection-title'><span>Creighton University</span><span>Studies in Computer Science</span><span>Aug 2020-Jan 2022</span></div>
             

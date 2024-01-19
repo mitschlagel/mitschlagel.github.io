@@ -2,10 +2,6 @@ import React from "react"
 
 import '../App.css';
 
-import instagramIcon from '../images/instagram.png'
-import linkedinIcon from '../images/linkedin.png'
-import githubIcon from '../images/github.png'
-
 import headshot from '../images/headshot.jpg';
 import headshotColor from '../images/fullcolorheadshot.png'
 
@@ -17,7 +13,8 @@ import SoftwareResume from "./SoftwareResume";
 import MusicianResume from "./MusicianResume";
 import EducatorResume from "./EducatorResume";
 
-import { SocialIcon } from "react-social-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { icon } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 export const Headline = () => {
   return(
@@ -58,10 +55,10 @@ export const ResumeButtons = () => {
 export const SocialLinks = () => {
   return (
     <div className="social-links">
-      <SocialIcon url="https://www.instagram.com/mitschlagel" bgColor="#266043" />
-      <SocialIcon url="https://www.linkedin.com/in/spencerljones" bgColor="#266043"/>
-      <SocialIcon url="https://github.com/mitschlagel" bgColor="#266043"/>
-      <SocialIcon url="mailto:spencerjonesstudio@gmail.com" bgColor="#266043"/>
+      <a href="https://www.instagram.com/mitschlagel"><FontAwesomeIcon icon={icon({name: 'instagram', style: 'brands'})} style={{fontSize: "2.5em"}} /></a>
+      <a href="https://www.linkedin.com/in/spencerljones"><FontAwesomeIcon icon={icon({name: 'linkedin', style: 'brands'})} style={{fontSize: "2.5em"}} /></a>
+      <a href="https://www.github.com/mitschlagel"><FontAwesomeIcon icon={icon({name: 'github', style: 'brands'})} style={{fontSize: "2.5em"}} /></a>
+      <a href="mailto:spencerjonesstudio@gmail.com"><FontAwesomeIcon icon={icon({name: 'envelope', family: 'classic', style: 'regular'})} style={{fontSize: "2.5em"}} /></a>
     </div>
   );
 };
