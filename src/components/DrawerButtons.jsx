@@ -9,17 +9,17 @@ import { icon } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 import useAnalyticsEventTracker from "../hooks/useAnalyticsEventTracker";
 
-Drawer.propTypes = {
-  content: PropTypes.element,
-  onClose: PropTypes.func,
-};
 
-DrawerButton.propTypes = {
-  title: PropTypes.string,
-  content: PropTypes.element,
-};
+
+
 
 const Drawer = ({ content, onClose }) => {
+
+  Drawer.propTypes = {
+    content: PropTypes.element,
+    onClose: PropTypes.func,
+  };
+
   const [isOpen, setIsOpen] = useState(true);
   const drawerRef = useRef(null);
 
@@ -62,6 +62,12 @@ const Drawer = ({ content, onClose }) => {
 };
 
 export const DrawerButton = ({ title, content }) => {
+
+  DrawerButton.propTypes = {
+    title: PropTypes.string,
+    content: PropTypes.element,
+  };
+  
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const trackEvent = useAnalyticsEventTracker("resume_views");
