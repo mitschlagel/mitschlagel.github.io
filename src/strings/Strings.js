@@ -1,5 +1,5 @@
 export const headlineText =
-  "A versatile creative professional enjoying a multi-faceted career as a software engineer, orchestral musician, and educator.";
+  "A versatile creative professional enjoying a multifaceted career as a software engineer, orchestral musician, and educator.";
 export const musicianSummaryText1 =
   "For more than a decade Spencer has served as a first-call percussionist and timpanist with the Omaha and Kansas City Symphonies. He has performed with the Grand Rapids Symphony, Indianapolis Symphony Orchestra, Hawaii Symphony Orchestra, and the New World Symphony of Miami Beach, FL. He is on the roster of the Omaha Chamber Music Society and is a co-founder of Omaha Percussion Group. He has accompanied a diverse range of artists, including Yo-Yo Ma, Lyle Lovett, Joyce DiDonato, Guster, Branford Marsalis, Ben Folds, and Bernadette Peters.";
 export const musicianSummaryText2 =
