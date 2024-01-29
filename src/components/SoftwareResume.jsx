@@ -112,7 +112,6 @@ const SoftwareResume = () => {
               Object-Oriented Programming, Data Structures, Computer
               Organization and Architecture, and Web Development.
             </li>
-            <li>GPA: 3.88</li>
           </ul>
         </div>
 

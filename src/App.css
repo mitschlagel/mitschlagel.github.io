@@ -4,8 +4,6 @@
   padding: 2%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   max-width: 700px;
   font-family: "Merriweather Sans", sans-serif;
   font-weight: 300;
@@ -14,8 +12,8 @@
 .main {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   width: 100%;
+  padding: 2% 0;
 }
 
 .title {
@@ -32,6 +30,7 @@
   font-size: 1.5em;
   font-weight: 400;
   font-family: "Merriweather Sans";
+  width: 100%;
 }
 
 .big-text {
@@ -41,7 +40,9 @@
 
 @media only screen and (max-width: 768px) {
   .resume-buttons-container {
+    display: flex;
     flex-direction: column;
+    justify-content: center;
     padding: 0 5% 0 5%;
   }
 
@@ -67,6 +68,7 @@
   .headline {
     flex-direction: column-reverse;
     font-size: 1.2em;
+    align-items: center;
   }
 
   .resume-subsection-title#software-job {
@@ -105,7 +107,9 @@ a {
 
 .resume-buttons-container {
   display: flex;
+  justify-content: center;
   padding-top: 24px;
+  width: 100%;
 }
 
 .resume-buttons-container > *:not(:last-child) {
