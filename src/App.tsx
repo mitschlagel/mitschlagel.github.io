@@ -1,6 +1,9 @@
 import './App.css'
 import styled from 'styled-components'
 
+import { HeaderText } from './assets/notes/headerText';
+import { note001 } from './assets/notes/note001';
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -9,12 +12,11 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
-  background-color: #ccc;
+  
   color: #222;
   padding: 1em;
-  text-align: center;
   width: 100%;
-  border: 1px solid #ccc;
+  font-size: 1.2em;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -32,7 +34,7 @@ display: flex;
   
   border: 1px solid #ccc;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1080px) {
     flex-direction: column;
     width: 100%;
 }
@@ -40,8 +42,7 @@ display: flex;
 
 const Slide = styled.div`
   width: 65%;
-  padding: 0;
-  @media (max-width: 768px) {
+  @media (max-width: 1080px) {
     width: 100%;
     align-items: center;
   }
@@ -52,9 +53,9 @@ const Note = styled.div`
   padding: 0em 1em;
   align-items: flex-start;
   
-    @media (max-width: 768px) {
+    @media (max-width: 1080px) {
       width: 100%;
-      align-items: center;
+      padding: 0;
     }
 `;
 
@@ -98,15 +99,50 @@ const Post: React.FC<PostProps> = ({ slide, headline, note }) => {
   );
 }
 
+const SocialLinks: React.FC = () => {
+  return (
+    <div style={{display: 'flex', justifyContent: 'center'}}>
+      <a 
+      href="https://www.instagram.com/mitschlagel"
+        style={{ 
+          textDecoration: 'none',
+          color: 'inherit'
+        }}
+      >
+        <img src='src/assets/icons/instagram.png' style={{width: 32}} alt='instagramIcon' />
+      </a>
+      <a 
+      href="https://github.com/mitschlagel"
+        style={{  
+          textDecoration: 'none',
+          color: 'inherit',
+          marginLeft: 16
+        }}
+      >
+        <img src='src/assets/icons/github.png' style={{width: 32}} alt='githubIcon' />
+      </a>
+      <a 
+      href="https://www.linkedin.com/in/spencerljones"
+        style={{  
+          textDecoration: 'none',
+          color: 'inherit',
+          marginLeft: 16
+        }}
+      >
+        <img src='src/assets/icons/linkedin.png' style={{width: 32}} alt='linkedinIcon' />
+      </a>
+    </div>
+  )}
+
 const App: React.FC = () => {
   return (
   <Container>
     <Header>
-      <h1>My Blog</h1>
-      <p>About me</p>
+      <h1 style={{textAlign: 'center'}}>mitschalgel</h1>
+      <HeaderText />
+      <SocialLinks/>
     </Header>
-    <Post slide='src/assets/slides/slide001.jpg' headline='Post 1' note='this is the content' />
-    <Post headline='Post 2' note='this is the content' />
+    <Post slide='src/assets/slides/slide001.jpg' headline='Post 1' note={note001} />
   </Container>
   )
 }
