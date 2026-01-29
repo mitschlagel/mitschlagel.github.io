@@ -46,7 +46,6 @@ The book is full of practical advice and real-world examples.
 It covers topics like mentoring, managing teams, and dealing with difficult people. 
 It refreshingly gives ample time to the importance of communication, empathy, and self-awareness.`,A1=`When your dev env is broken, spend that time building useful things outside of it. I present <a href="http://www.tstatus.lol" target="_blank" rel="noopener noreferrer">tstatus.lol</a>, a simple tool I built to check if an internal dev environment was working. It's really just a counter that increments when you hit it - no actual connection to any status API. But building it taught me how to work with AWS Lambda functions and API Gateway, which was worth the time investment.`,z1=`Check out <a href="https://symphonyanywhere.org" target="_blank" rel="noopener noreferrer">Symphony Anywhere</a>, Omaha Symphony's on-demand streaming platform. This orchesta punches way above their weight, and as a regular extra player with OSO, I'm excited to see them embracing digital content delivery. The platform offers full concerts, educational materials, and behind-the-scenes features. It's a great way to experience what Omaha has to offer.`,R1=`
 <article>
-  <h1>What We Talk About When We Talk About Coding</h1>
   
   <p>I've been writing code professionally for five years. When I began my career transition away from music in the summer of 2020, the path seemed clear: learn CS fundamentals, master a language and a framework or two, climb the ladder. Technical knowledge == golden ticket.</p>
   
