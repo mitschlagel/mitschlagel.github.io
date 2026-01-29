@@ -396,7 +396,7 @@ const App: React.FC = () => {
           <TitleRow>
             <TitleContainer>
               <MainTitle>spencerjones.studio</MainTitle>
-              <SubTitle>engineering, business, & music</SubTitle>
+              <SubTitle>thoughts on tech & music</SubTitle>
             </TitleContainer>
             <SocialLinks/>
           </TitleRow>
