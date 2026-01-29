@@ -1,6 +1,5 @@
 export const note004 = `
 <article>
-  <h1>What We Talk About When We Talk About Coding</h1>
   
   <p>I've been writing code professionally for five years. When I began my career transition away from music in the summer of 2020, the path seemed clear: learn CS fundamentals, master a language and a framework or two, climb the ladder. Technical knowledge == golden ticket.</p>
   
@@ -16,11 +15,11 @@ export const note004 = `
   
   <h2>The Deep End</h2>
   
-  <p>There's a moment I think about often. A few months into my iOS role, I was given my first real feature: a complete rewrite of mobile deposits. Not a small bug fix. Not a minor UI tweak. A full rewrite of one of the app's core features. And there was only one other person on the iOS team at the time.</p>
+  <p>There's a moment I think about often. A few months into my iOS role, I was given my first real feature: a complete rewrite of mobile deposits. Not a small bug fix. Not a minor UI tweak. A full rewrite of one of the app's core features. And of the 3 of us on the iOS team, only one had any real experience.</p>
   
   <p>I had no idea what I was doing.</p>
   
-  <p>I spent weeks reading through the existing codebase, trying to understand how camera permissions worked, how image processing happened, how the deposit flow connected to the backend. I drew diagrams. I wrote pseudocode. I bothered my one teammate with endless questions. I felt completely out of my depth, certain that someone would realize they'd made a terrible mistake giving me this responsibility.</p>
+  <p>I spent weeks reading through the existing codebase, trying to understand how camera permissions worked, how image processing happened, how the deposit flow connected to the backend. I drew diagrams. I wrote pseudocode. I bothered my senior colleague with endless questions. I felt completely out of my depth, certain that someone would realize they'd made a terrible mistake giving me this responsibility.</p>
   
   <p>But slowly, painfully, it started to make sense. Not just the mobile deposit feature, but how to approach unfamiliar problems. How to break down something overwhelming into manageable pieces. How to read code as a map of decisions someone else had made. The struggle itself had taught me something that had nothing to do with the specific problem I was solving.</p>
   
@@ -54,7 +53,7 @@ export const note004 = `
   
   <h2>The Mentorship Question</h2>
   
-  <p>I think a lot about the developers who taught me. The senior engineer who would let me struggle with a problem for an hour before gently pointing me in the right direction. The tech lead who made me explain my reasoning before approving my PRs, even when we both knew his way would be faster. The staff engineer who showed me how to read error messages like a detective, following clues rather than guessing.</p>
+  <p>I think a lot about the developers who taught me. The senior engineer who would let me struggle with a problem for an hour before gently pointing me in the right direction. The tech lead who made me explain my reasoning before approving my MRs, even when we both knew his way would be faster.</p>
   
   <p>What does mentorship look like now? When a junior developer can ask ChatGPT instead of asking me, what's my role? Am I still needed?</p>
   
