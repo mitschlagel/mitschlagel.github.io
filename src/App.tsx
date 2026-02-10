@@ -2,15 +2,15 @@ import './App.css'
 import styled from 'styled-components'
 import { createGlobalStyle } from 'styled-components'
 import { useState, useEffect, useRef } from 'react'
-import { note001 } from './assets/notes/note001';
-import { note002 } from './assets/notes/note002';
-import { note003 } from './assets/notes/note003';
-import { note004 } from './assets/notes/note004';
+import matter from 'gray-matter'
+import { marked } from 'marked'
 import headshot from './assets/img/headshot.png';
+import { Buffer } from 'buffer';
+
+// Make Buffer available globally for gray-matter
+window.Buffer = Buffer;
 
 const GlobalStyle = createGlobalStyle<{ $isDark: boolean }>`
-  @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
-
   * {
     margin: 0;
     padding: 0;
@@ -257,40 +257,50 @@ interface Post {
   id: number;
   title: string;
   date: string;
+  dateRaw: string;
   slug: string;
   content: string;
 }
 
-const posts: Post[] = [
-  {
-    id: 4,
-    title: 'I remember the world before ChatGPT',
-    date: 'Feb 8, 2026',
-    slug: 'chatgpt',
-    content: note004
-  },
-  {
-    id: 3,
-    title: 'Symphony Anywhere',
-    date: 'Jan 15, 2026',
-    slug: 'symphony-anywhere',
-    content: note003
-  },
-  {
-    id: 2,
-    title: 'tstatus.lol',
-    date: 'Dec 12, 2025',
-    slug: 'tstatus',
-    content: note002
-  },
-  {
-    id: 1,
-    title: 'The Manager\'s Path',
-    date: 'Nov 3, 2025',
-    slug: 'managers-path',
-    content: note001
-  }
-];
+// Load and parse all markdown files
+const loadPosts = (): Post[] => {
+  const markdownFiles = import.meta.glob('./assets/notes/*.md', { eager: true, query: '?raw', import: 'default' });
+  
+  const posts: Post[] = Object.entries(markdownFiles)
+    .filter(([path]) => !path.includes('README.md')) // Exclude README
+    .map(([_path, content], index) => {
+      const { data, content: markdownContent } = matter(content as string);
+      const htmlContent = marked(markdownContent);
+      
+      return {
+        id: index + 1,
+        title: data.title as string,
+        date: formatDate(data.date as string),
+        dateRaw: data.date as string,
+        slug: data.slug as string,
+        content: htmlContent as string
+      };
+    });
+
+  // Sort by date (newest first)
+  return posts.sort((a, b) => {
+    const dateA = new Date(a.dateRaw);
+    const dateB = new Date(b.dateRaw);
+    return dateB.getTime() - dateA.getTime();
+  });
+};
+
+// Helper to format date nicely
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric' 
+  });
+};
+
+const posts = loadPosts();
 
 const HalftoneImage: React.FC<{ src: string; isDark: boolean }> = ({ src, isDark }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -363,7 +373,12 @@ const HalftoneImage: React.FC<{ src: string; isDark: boolean }> = ({ src, isDark
 };
 
 const App: React.FC = () => {
-  const sortedPosts = [...posts].sort((a, b) => b.id - a.id);
+  // Posts are already sorted by date in loadPosts, but ensure newest first
+  const sortedPosts = [...posts].sort((a, b) => {
+    const dateA = new Date(a.dateRaw);
+    const dateB = new Date(b.dateRaw);
+    return dateB.getTime() - dateA.getTime(); // Newest first
+  });
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [isDark, setIsDark] = useState(() => {
     // Try to get saved preference securely
