@@ -1,5 +1,5 @@
 ---
-title: "I remember the world before ChatGPT"
+title: "The World Before ChatGPT"
 date: "2026-02-08"
 slug: "chatgpt"
 ---

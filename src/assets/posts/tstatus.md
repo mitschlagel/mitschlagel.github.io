@@ -1,5 +1,5 @@
 ---
-title: "tstatus.lol"
+title: "When the Env is Down"
 date: "2025-12-12"
 slug: "tstatus"
 ---

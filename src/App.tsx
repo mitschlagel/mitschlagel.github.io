@@ -1,7 +1,7 @@
 import './App.css'
 import styled from 'styled-components'
 import { createGlobalStyle } from 'styled-components'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import matter from 'gray-matter'
 import { marked } from 'marked'
 import headshot from './assets/img/headshot.png';
@@ -88,34 +88,12 @@ const Header = styled.header`
   }
 `;
 
-const ProfileImageWrapper = styled.div`
+const ProfileImage = styled.img`
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  overflow: hidden;
-  margin-bottom: 20px;
-  position: relative;
-`;
-
-const ProfileCanvas = styled.canvas<{ $isHovered: boolean }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: ${props => props.$isHovered ? 0 : 1};
-  transition: opacity 0.5s ease;
-  z-index: 2;
-`;
-
-const ProfileImage = styled.img<{ $isHovered: boolean }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-  z-index: 1;
+  margin-bottom: 20px;
 `;
 
 const Name = styled.h1<{ $isDark: boolean }>`
@@ -264,7 +242,7 @@ interface Post {
 
 // Load and parse all markdown files
 const loadPosts = (): Post[] => {
-  const markdownFiles = import.meta.glob('./assets/notes/*.md', { eager: true, query: '?raw', import: 'default' });
+  const markdownFiles = import.meta.glob('./assets/posts/*.md', { eager: true, query: '?raw', import: 'default' });
   
   const posts: Post[] = Object.entries(markdownFiles)
     .filter(([path]) => !path.includes('README.md')) // Exclude README
@@ -301,76 +279,6 @@ const formatDate = (dateString: string): string => {
 };
 
 const posts = loadPosts();
-
-const HalftoneImage: React.FC<{ src: string; isDark: boolean }> = ({ src, isDark }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const img = new Image();
-    
-    img.onload = () => {
-      if (!canvas) return;
-      
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-
-      const size = 150;
-      canvas.width = size;
-      canvas.height = size;
-
-      // Draw original image
-      ctx.drawImage(img, 0, 0, size, size);
-      const imageData = ctx.getImageData(0, 0, size, size);
-      
-      // Clear canvas
-      ctx.fillStyle = isDark ? '#1a1a1a' : '#ffffff';
-      ctx.fillRect(0, 0, size, size);
-      
-      // Halftone parameters
-      const dotSize = 4;
-      const dotSpacing = 5;
-      
-      // Draw halftone dots
-      for (let y = 0; y < size; y += dotSpacing) {
-        for (let x = 0; x < size; x += dotSpacing) {
-          const index = (y * size + x) * 4;
-          const r = imageData.data[index];
-          const g = imageData.data[index + 1];
-          const b = imageData.data[index + 2];
-          
-          // Calculate brightness (lightened version)
-          const brightness = (r * 0.299 + g * 0.587 + b * 0.114) / 255;
-          const adjustedBrightness = Math.min(brightness * 1.3, 1); // Lighten by 30%
-          
-          // Calculate dot radius based on brightness
-          const radius = (1 - adjustedBrightness) * (dotSize / 2);
-          
-          if (radius > 0.1) {
-            ctx.beginPath();
-            ctx.arc(x, y, radius, 0, Math.PI * 2);
-            ctx.fillStyle = isDark ? '#e5e5e5' : '#1a1a1a';
-            ctx.fill();
-          }
-        }
-      }
-    };
-    
-    img.src = src;
-  }, [src, isDark]);
-
-  return (
-    <ProfileImageWrapper 
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <ProfileCanvas ref={canvasRef} $isHovered={isHovered} />
-      <ProfileImage ref={imageRef} src={src} alt="Spencer Jones" $isHovered={isHovered} />
-    </ProfileImageWrapper>
-  );
-};
 
 const App: React.FC = () => {
   // Posts are already sorted by date in loadPosts, but ensure newest first
@@ -435,7 +343,7 @@ const App: React.FC = () => {
         </DarkModeToggle>
         
         <Header onClick={handleHomeClick}>
-          <HalftoneImage src={headshot} isDark={isDark} />
+          <ProfileImage src={headshot} alt="Spencer Jones" />
           <Name $isDark={isDark}>Spencer Jones</Name>
           <Tagline $isDark={isDark}>Software Engineer, Musician</Tagline>
         </Header>
