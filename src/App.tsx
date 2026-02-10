@@ -366,12 +366,37 @@ const App: React.FC = () => {
   const sortedPosts = [...posts].sort((a, b) => b.id - a.id);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [isDark, setIsDark] = useState(() => {
-    const saved = localStorage.getItem('darkMode');
-    return saved ? JSON.parse(saved) : false;
+    // Try to get saved preference securely
+    try {
+      const saved = localStorage.getItem('darkMode');
+      if (saved !== null) {
+        const parsed = JSON.parse(saved);
+        // Validate that it's actually a boolean
+        if (typeof parsed === 'boolean') {
+          return parsed;
+        }
+      }
+    } catch (e) {
+      // localStorage might be disabled or JSON parsing failed
+      console.warn('Could not read dark mode preference from localStorage');
+    }
+    
+    // Fall back to system preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return true;
+    }
+    
+    // Default to light mode if system preference unavailable
+    return false;
   });
 
   useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(isDark));
+    try {
+      localStorage.setItem('darkMode', JSON.stringify(isDark));
+    } catch (e) {
+      // localStorage might be disabled in private mode
+      console.warn('Could not save dark mode preference to localStorage');
+    }
   }, [isDark]);
 
   const handlePostClick = (post: Post) => {
