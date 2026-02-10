@@ -98,18 +98,24 @@ const ProfileImageWrapper = styled.div`
 `;
 
 const ProfileCanvas = styled.canvas<{ $isHovered: boolean }>`
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  display: ${props => props.$isHovered ? 'none' : 'block'};
-  transition: opacity 0.3s ease;
+  opacity: ${props => props.$isHovered ? 0 : 1};
+  transition: opacity 0.5s ease;
+  z-index: 2;
 `;
 
 const ProfileImage = styled.img<{ $isHovered: boolean }>`
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: ${props => props.$isHovered ? 'block' : 'none'};
-  transition: opacity 0.3s ease;
+  z-index: 1;
 `;
 
 const Name = styled.h1<{ $isDark: boolean }>`
@@ -391,7 +397,7 @@ const App: React.FC = () => {
         <Header onClick={handleHomeClick}>
           <HalftoneImage src={headshot} isDark={isDark} />
           <Name $isDark={isDark}>Spencer Jones</Name>
-          <Tagline $isDark={isDark}>Engineer, Musician</Tagline>
+          <Tagline $isDark={isDark}>Software Engineer, Musician</Tagline>
         </Header>
 
         {selectedPost ? (
