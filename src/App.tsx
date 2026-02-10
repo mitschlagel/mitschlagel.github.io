@@ -1,26 +1,14 @@
 import './App.css'
 import styled from 'styled-components'
 import { createGlobalStyle } from 'styled-components'
-import { HeaderText } from './assets/headerText';
+import { useState } from 'react'
 import { note001 } from './assets/notes/note001';
 import { note002 } from './assets/notes/note002';
 import { note003 } from './assets/notes/note003';
 import { note004 } from './assets/notes/note004';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faInstagram, 
-  faGithub, 
-  faLinkedin, 
-  faLastfm,
-  faBluesky
-} from '@fortawesome/free-brands-svg-icons';
-import slide001 from './assets/slides/slide001.jpg'
-import slide002 from './assets/slides/slide002.png'
-import slide003 from './assets/slides/slide003.png'
-import { useState, useRef, useEffect } from 'react'
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
 
   * {
     margin: 0;
@@ -31,386 +19,273 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Fira Code', monospace;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
+    background: #ffffff;
+    color: #1a1a1a;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 600;
-    line-height: 1.3;
+  a {
+    color: #1a1a1a;
+    text-decoration: none;
+    
+    &:hover {
+      color: #666;
+    }
   }
 `;
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2em;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 60px 20px;
   min-height: 100vh;
-  width: 100%;
 
   @media (max-width: 768px) {
-    padding: 2em;
+    padding: 40px 20px;
   }
 `;
 
-const Header = styled.div`
-  padding: 1em;
-  width: 100%;
-  font-size: 1.2em;
-  color: #222;
-  margin-bottom: 2em;
-  box-sizing: border-box;
-
-  @media (max-width: 768px) {
-    padding: 0.8em;
-    font-size: 1em;
+const Header = styled.header`
+  margin-bottom: 60px;
+  cursor: pointer;
+  
+  &:hover h1 {
+    color: #666;
   }
 `;
 
-const TitleRow = styled.div`
+const Name = styled.h1`
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #1a1a1a;
+`;
+
+const Tagline = styled.p`
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+  font-weight: 400;
+`;
+
+const PostList = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 0;
+`;
+
+const PostLink = styled.a`
+  display: flex;
   justify-content: space-between;
-  margin: 0;
-  padding: 0 0 1.5em 0;
-  width: 100%;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e5e5;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  
+  &:hover {
+    background: #fafafa;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: -8px;
+    margin-right: -8px;
+  }
 
   @media (max-width: 768px) {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1em;
-    padding-bottom: 1.5em;
+    align-items: flex-start;
+    gap: 4px;
   }
 `;
 
-const TitleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 0;
-  padding: 0;
-
-  @media (max-width: 768px) {
-    align-items: center;
-  }
-`;
-
-const MainTitle = styled.h1`
-  color: #00563B;
-  margin: 0;
-  padding: 0;
-  font-size: 2em;
-  position: relative;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(to right, #00563B, transparent);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.6em;
-    
-    &:after {
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-    }
-  }
-`;
-
-const SubTitle = styled.div`
-  color: #00563B;
-  font-size: 1.2em;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  font-style: italic;
+const PostTitle = styled.span`
+  font-size: 16px;
+  color: #1a1a1a;
   font-weight: 500;
-  letter-spacing: -0.01em;
+`;
+
+const PostDate = styled.span`
+  font-size: 14px;
+  color: #999;
+  font-weight: 400;
+  white-space: nowrap;
+  margin-left: 16px;
 
   @media (max-width: 768px) {
-    font-size: 1em;
+    margin-left: 0;
   }
 `;
 
-const Section = styled.div<{ isExpandable: boolean; isExpanded: boolean }>`
-  display: flex;
-  width: 100%;
-  background-color: #fff;
-  color: #222;
-  padding: 1em; 
-  margin-top: 2em;
-  align-items: stretch;
-  border: 1px solid #ccc;
-  cursor: ${props => props.isExpandable ? 'pointer' : 'default'};
-  transition: all 0.3s ease;
-  position: relative;
-
-  ${props => props.isExpandable && !props.isExpanded && `
-    &:after {
-      content: '↓ Read More';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 2em 1em 1em;
-      background: linear-gradient(to top, 
-        rgba(255,255,255,1) 40%, 
-        rgba(255,255,255,0.95) 60%,
-        rgba(255,255,255,0.8) 80%,
-        rgba(255,255,255,0) 100%
-      );
-      text-align: center;
-      color: #007F58;
-      font-weight: 600;
-      font-size: 1.1em;
-      text-shadow: 0 0 10px rgba(255,255,255,0.8);
-    }
-  `}
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    padding: 0.8em;
-    gap: 1em;
-  }
-`;
-
-const Slide = styled.div`
-  width: 25%;
-  position: relative;
-  overflow: hidden;
+const Article = styled.article`
+  max-width: 100%;
   
-  @media (max-width: 768px) {
-    width: 100%;
-    aspect-ratio: 16/9;
-  }
-`;
-
-const Image = styled.img`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-`;
-
-const Note = styled.div<{ isExpanded: boolean }>`
-  width: 75%;
-  padding: 0em 1em;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  
-  .post-content {
-    padding: 0;
-    margin: 0 0 1.5em 0;
-    max-height: ${props => props.isExpanded ? 'none' : '250px'};
-    overflow: hidden;
-    position: relative;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+  h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: #1a1a1a;
   }
   
-  h1, h2, h3, h4 {
-    margin: 1.5em 0 1em 0;
-    color: #00563B;
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 40px 0 16px 0;
+    color: #1a1a1a;
   }
-
-  h1:first-child, h2:first-child, h3:first-child, h4:first-child {
-    margin-top: 0;
+  
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 32px 0 12px 0;
+    color: #1a1a1a;
+  }
+  
+  p {
+    margin: 16px 0;
+    line-height: 1.7;
+    color: #1a1a1a;
   }
   
   a {
-    color: #007F58;
-    text-decoration: none;
-    transition: color 0.2s ease;
-    font-weight: 600;
+    color: #1a1a1a;
+    text-decoration: underline;
     
     &:hover {
-      color: #00563B;
+      color: #666;
     }
   }
   
-  @media (max-width: 768px) {
-    width: 100%;
-    padding: 0;
+  i {
+    font-style: italic;
   }
 `;
 
-const Headline = styled.h2`
-  font-size: 2em;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  color: #00563B;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  
-  @media (max-width: 768px) {
-    font-size: 1.5em;
-  }
+const ArticleDate = styled.div`
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 40px;
 `;
 
-const SocialLinksContainer = styled.div`
+const Footer = styled.footer`
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid #e5e5e5;
+`;
+
+const SocialLinks = styled.div`
   display: flex;
-  gap: 8px;
-
-  @media (max-width: 768px) {
-    margin-top: 0.5em;
-  }
+  gap: 24px;
+  flex-wrap: wrap;
 `;
 
 const SocialLink = styled.a`
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  color: #00563B;
-  font-size: 2.5rem;
-  margin: 0 0.25em;
-  transition: color 0.2s ease;
+  font-size: 14px;
+  color: #666;
   
   &:hover {
-    color: #007F58;
+    color: #1a1a1a;
   }
 `;
 
-interface PostProps {
-  slide?: string;
-  headline?: string;
-  note: string;
+interface Post {
   id: number;
+  title: string;
+  date: string;
+  slug: string;
+  content: string;
 }
 
-const Post: React.FC<PostProps> = ({ slide, headline, note }) => { 
-  const [isExpanded, setIsExpanded] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [isExpandable, setIsExpandable] = useState(false);
-
-  useEffect(() => {
-    if (contentRef.current) {
-      const height = contentRef.current.scrollHeight;
-      setIsExpandable(height > 250);
-    }
-  }, [note]);
-
-  const handleClick = () => {
-    if (isExpandable) {
-      setIsExpanded(!isExpanded);
-    }
-  };
-
-  return (
-    <Section 
-      isExpandable={isExpandable} 
-      isExpanded={isExpanded}
-      onClick={handleClick}
-    >
-      <Slide>
-        {slide ? (
-          <Image src={slide} alt={headline} />
-        ) : (
-          <Headline>{headline}</Headline>
-        )}
-      </Slide>
-      <Note isExpanded={isExpanded}>
-        <div 
-          ref={contentRef}
-          className="post-content"
-          dangerouslySetInnerHTML={{ __html: note }}
-        />
-      </Note>
-    </Section>
-  );
-}
-
-const posts: PostProps[] = [
+const posts: Post[] = [
   {
     id: 4,
-    headline: '"I remember the world before ChatGPT"',
-    note: note004
-  },
-  {
-    id: 1,
-    slide: slide001,
-    headline: 'Post 1',
-    note: note001
-  },
-  {
-    id: 2,
-    slide: slide002,
-    headline: 'Post 2',
-    note: note002
+    title: 'I remember the world before ChatGPT',
+    date: 'Feb 8, 2026',
+    slug: 'chatgpt',
+    content: note004
   },
   {
     id: 3,
-    slide: slide003,
-    headline: 'Symphony Anywhere',
-    note: note003
+    title: 'Symphony Anywhere',
+    date: 'Jan 15, 2026',
+    slug: 'symphony-anywhere',
+    content: note003
+  },
+  {
+    id: 2,
+    title: 'tstatus.lol',
+    date: 'Dec 12, 2025',
+    slug: 'tstatus',
+    content: note002
+  },
+  {
+    id: 1,
+    title: 'The Manager\'s Path',
+    date: 'Nov 3, 2025',
+    slug: 'managers-path',
+    content: note001
   }
 ];
 
-const SocialLinks: React.FC = () => {
-  return (
-    <SocialLinksContainer>
-      <SocialLink href="https://www.instagram.com/mitschlagel">
-        <FontAwesomeIcon icon={faInstagram} />
-      </SocialLink>
-      <SocialLink href="https://github.com/mitschlagel">
-        <FontAwesomeIcon icon={faGithub} />
-      </SocialLink>
-      <SocialLink href="https://www.linkedin.com/in/spencerljones">
-        <FontAwesomeIcon icon={faLinkedin} />
-      </SocialLink>
-      <SocialLink href="#">
-        <FontAwesomeIcon icon={faBluesky} />
-      </SocialLink>
-      <SocialLink href="#">
-        <FontAwesomeIcon icon={faLastfm} />
-      </SocialLink>
-    </SocialLinksContainer>
-  )}
-
 const App: React.FC = () => {
   const sortedPosts = [...posts].sort((a, b) => b.id - a.id);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+
+  const handlePostClick = (post: Post) => {
+    setSelectedPost(post);
+  };
+
+  const handleHomeClick = () => {
+    setSelectedPost(null);
+  };
 
   return (
     <>
       <GlobalStyle />
       <Container>
-        <Header>
-          <TitleRow>
-            <TitleContainer>
-              <MainTitle>spencerjones.studio</MainTitle>
-              <SubTitle>thoughts on tech & music</SubTitle>
-            </TitleContainer>
-            <SocialLinks/>
-          </TitleRow>
-          <HeaderText />
+        <Header onClick={handleHomeClick}>
+          <Name>Spencer Jones</Name>
+          <Tagline>Engineer, Musician</Tagline>
         </Header>
-        {sortedPosts.map(post => (
-          <Post 
-            key={post.id}
-            slide={post.slide}
-            headline={post.headline}
-            note={post.note}
-            id={post.id}
-          />
-        ))}
+
+        {selectedPost ? (
+          <Article>
+            <h1>{selectedPost.title}</h1>
+            <ArticleDate>{selectedPost.date}</ArticleDate>
+            <div dangerouslySetInnerHTML={{ __html: selectedPost.content }} />
+          </Article>
+        ) : (
+          <PostList>
+            {sortedPosts.map(post => (
+              <PostLink key={post.id} onClick={() => handlePostClick(post)}>
+                <PostTitle>{post.title}</PostTitle>
+                <PostDate>{post.date}</PostDate>
+              </PostLink>
+            ))}
+          </PostList>
+        )}
+
+        <Footer>
+          <SocialLinks>
+            <SocialLink href="https://github.com/mitschlagel" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </SocialLink>
+            <SocialLink href="https://www.linkedin.com/in/spencerljones" target="_blank" rel="noopener noreferrer">
+              LinkedIn
+            </SocialLink>
+            <SocialLink href="https://www.instagram.com/mitschlagel" target="_blank" rel="noopener noreferrer">
+              Instagram
+            </SocialLink>
+            <SocialLink href="#" target="_blank" rel="noopener noreferrer">
+              Bluesky
+            </SocialLink>
+            <SocialLink href="#" target="_blank" rel="noopener noreferrer">
+              Last.fm
+            </SocialLink>
+          </SocialLinks>
+        </Footer>
       </Container>
     </>
   )
