@@ -1,6 +1,6 @@
 ---
 title: "The World Before ChatGPT"
-date: "2026-02-08"
+date: "2026-01-28"
 slug: "chatgpt"
 ---
 
