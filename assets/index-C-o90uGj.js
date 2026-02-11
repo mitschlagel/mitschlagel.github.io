@@ -226,7 +226,7 @@ The homepage shows a simple list of post titles and dates. Click one, and the fu
 - Markdown stays readable even if I change frameworks later
 `,__vite_glob_0_2=`---
 title: "The World Before ChatGPT"
-date: "2026-02-08"
+date: "2026-01-28"
 slug: "chatgpt"
 ---
 
