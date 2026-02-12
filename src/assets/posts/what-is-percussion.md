@@ -1,0 +1,13 @@
+---
+title: "What Exactly is a \"Percussionist\" Anyways?"
+date: "2018-09-30"
+slug: "what-is-percussion"
+---
+
+Perhaps the best definition of percussion comes from the German word for percussion: schlagzeug. “Schlag”, meaning “hit”, and “zeug” meaning “stuff”. So—a percussionist is a musician who hits stuff. As Steven Schick says, choosing the stuff and deciding how to hit it is the essence of the art of percussion.
+
+Humans have been creating sound by hitting and striking together “stuff“ for our entire existence, and percussion instruments are found in nearly every culture on the planet. However, only in the 18th century did percussion instruments find their way into Western classical music; first only as novelties and sound effects, but soon evolving to fill dramatic and critical roles in the orchestral repertoire. Even then, solo and chamber percussion music did not arise until the twentieth century, a part of the reactionary work of modern and postmodern composers. Using percussion, composers could truly break free from Western classical music norms and create entirely new soundscapes (e.g. Edgard Varèse’s Ionisation), use traditional and ethnic instruments in extraordinarily complex ways (e.g. John Cage’s Third Construction) and even develop entirely new and unique systems of notation (e.g Iannis Xenakis’ Psappha).
+
+Since it is largest of the musical instrument families—and because we are expected to know how to play anything not a stringed, brass, or woodwind instrument— becoming a percussionist can be a daunting task. Just last week I performed a Harry Potter film live, playing fourteen different instruments, while the percussion section as a whole (five players) used approximately eighty. How the heck does one learn so many different instruments? I sort them into five major areas: snare drum (the most technically challenging of all classical percussion instruments), keyboards (marimba, xylophone, bells, vibraphone, and more), timpani, drum set, and accessories (tambourine, cymbals, triangle, bass drum, and much more). Additionally, percussionists must be familiar with an enormous number of traditional and non-Western instruments, all of which require specialized training to master.
+
+Dedicated and methodical study of the major percussion areas—along with a healthy dose of music theory and ear training (and many years!)—can turn a motivated student into a percussionist who knows precisely which stuff to choose and exactly how to hit it.
