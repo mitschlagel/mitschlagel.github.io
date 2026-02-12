@@ -151,7 +151,7 @@ const PostList = styled.div`
   gap: 0;
 `;
 
-const PostLink = styled.a<{ $isDark: boolean }>`
+const PostLink = styled.a<{ $isDark: boolean; $index: number; $total: number }>`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -161,11 +161,38 @@ const PostLink = styled.a<{ $isDark: boolean }>`
   cursor: pointer;
   
   &:hover {
-    background: ${props => props.$isDark ? '#2a2a2a' : '#fafafa'};
+    // Calculate gradient position (0 = top, 1 = bottom)
+    ${props => {
+      const position = props.$total > 1 ? props.$index / (props.$total - 1) : 0;
+      
+      if (props.$isDark) {
+        // Dark mode: lightest at top, darkest at bottom
+        const bgLightness = Math.round(95 - (position * 90)); // 95% to 5%
+        // High contrast text: dark text on light bg, light text on dark bg
+        const textLightness = bgLightness > 50 ? 10 : 95;
+        return `
+          background: hsl(0, 0%, ${bgLightness}%);
+          color: hsl(0, 0%, ${textLightness}%);
+        `;
+      } else {
+        // Light mode: darkest at top, lightest at bottom
+        const bgLightness = Math.round(5 + (position * 93)); // 5% to 98%
+        // High contrast text: dark text on light bg, light text on dark bg
+        const textLightness = bgLightness > 50 ? 10 : 95;
+        return `
+          background: hsl(0, 0%, ${bgLightness}%);
+          color: hsl(0, 0%, ${textLightness}%);
+        `;
+      }
+    }}
     padding-left: 8px;
     padding-right: 8px;
     margin-left: -8px;
     margin-right: -8px;
+    
+    span {
+      color: inherit;
+    }
   }
 
   @media (max-width: 768px) {
@@ -387,8 +414,14 @@ const App: React.FC = () => {
           </Article>
         ) : (
           <PostList>
-            {sortedPosts.map(post => (
-              <PostLink key={post.id} $isDark={isDark} onClick={() => handlePostClick(post)}>
+            {sortedPosts.map((post, index) => (
+              <PostLink 
+                key={post.id} 
+                $isDark={isDark} 
+                $index={index}
+                $total={sortedPosts.length}
+                onClick={() => handlePostClick(post)}
+              >
                 <PostTitle $isDark={isDark}>{post.title}</PostTitle>
                 <PostDate $isDark={isDark}>{post.date}</PostDate>
               </PostLink>

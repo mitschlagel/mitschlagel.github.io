@@ -13,7 +13,9 @@ const NowPlayingContent = styled.div`
   align-items: center;
   
   @media (max-width: 768px) {
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
   }
 `;
 
