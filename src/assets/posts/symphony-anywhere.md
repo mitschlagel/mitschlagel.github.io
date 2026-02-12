@@ -1,6 +1,6 @@
 ---
-title: "Symphony Anywhere"
-date: "2026-01-15"
+title: "Omaha Symphony Anywhere"
+date: "2025-12-15"
 slug: "symphony-anywhere"
 ---
 

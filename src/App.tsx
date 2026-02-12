@@ -7,6 +7,7 @@ import { marked } from 'marked'
 import headshot from './assets/img/headshot.png';
 import { Buffer } from 'buffer';
 import { SiGithub, SiLinkedin, SiInstagram, SiBluesky, SiLastdotfm } from 'react-icons/si';
+import NowPlaying from './components/NowPlaying';
 
 // Make Buffer available globally for gray-matter
 window.Buffer = Buffer;
@@ -356,7 +357,7 @@ const App: React.FC = () => {
         <Header>
           <HeaderClickable onClick={handleHomeClick}>
             <ProfileImage src={headshot} alt="Spencer Jones" />
-            <Name $isDark={isDark}>Spencer Jones</Name>
+            <Name $isDark={isDark}>spencerjones.studio</Name>
             <Tagline $isDark={isDark}>Software Engineer, Musician</Tagline>
           </HeaderClickable>
           <SocialIconsContainer>
@@ -395,7 +396,7 @@ const App: React.FC = () => {
           </PostList>
         )}
 
-
+        <NowPlaying isDark={isDark} />
       </Container>
     </>
   )
