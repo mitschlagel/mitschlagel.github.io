@@ -6,6 +6,7 @@ import matter from 'gray-matter'
 import { marked } from 'marked'
 import headshot from './assets/img/headshot.png';
 import { Buffer } from 'buffer';
+import { SiGithub, SiLinkedin, SiInstagram, SiBluesky, SiLastdotfm } from 'react-icons/si';
 
 // Make Buffer available globally for gray-matter
 window.Buffer = Buffer;
@@ -77,8 +78,14 @@ const DarkModeToggle = styled.button<{ $isDark: boolean }>`
 
 const Header = styled.header`
   margin-bottom: 60px;
-  cursor: pointer;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const HeaderClickable = styled.div`
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -110,6 +117,31 @@ const Tagline = styled.p<{ $isDark: boolean }>`
   margin: 0;
   font-weight: 400;
   transition: color 0.3s ease;
+`;
+
+const SocialIconsContainer = styled.div`
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+  align-items: center;
+`;
+
+const SocialIconLink = styled.a<{ $isDark: boolean }>`
+  color: ${props => props.$isDark ? '#999' : '#666'};
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
+    transform: translateY(-2px);
+  }
+  
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const PostList = styled.div`
@@ -208,27 +240,6 @@ const ArticleDate = styled.div<{ $isDark: boolean }>`
   font-size: 14px;
   color: ${props => props.$isDark ? '#666' : '#999'};
   margin-bottom: 40px;
-`;
-
-const Footer = styled.footer<{ $isDark: boolean }>`
-  margin-top: 80px;
-  padding-top: 40px;
-  border-top: 1px solid ${props => props.$isDark ? '#404040' : '#e5e5e5'};
-`;
-
-const SocialLinks = styled.div`
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-`;
-
-const SocialLink = styled.a<{ $isDark: boolean }>`
-  font-size: 14px;
-  color: ${props => props.$isDark ? '#999' : '#666'};
-  
-  &:hover {
-    color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
-  }
 `;
 
 interface Post {
@@ -342,10 +353,29 @@ const App: React.FC = () => {
           {isDark ? '☼' : '☽'}
         </DarkModeToggle>
         
-        <Header onClick={handleHomeClick}>
-          <ProfileImage src={headshot} alt="Spencer Jones" />
-          <Name $isDark={isDark}>Spencer Jones</Name>
-          <Tagline $isDark={isDark}>Software Engineer, Musician</Tagline>
+        <Header>
+          <HeaderClickable onClick={handleHomeClick}>
+            <ProfileImage src={headshot} alt="Spencer Jones" />
+            <Name $isDark={isDark}>Spencer Jones</Name>
+            <Tagline $isDark={isDark}>Software Engineer, Musician</Tagline>
+          </HeaderClickable>
+          <SocialIconsContainer>
+            <SocialIconLink $isDark={isDark} href="https://github.com/mitschlagel" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <SiGithub />
+            </SocialIconLink>
+            <SocialIconLink $isDark={isDark} href="https://www.linkedin.com/in/spencerljones" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <SiLinkedin />
+            </SocialIconLink>
+            <SocialIconLink $isDark={isDark} href="https://www.instagram.com/mitschlagel" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <SiInstagram />
+            </SocialIconLink>
+            <SocialIconLink $isDark={isDark} href="https://bsky.app/profile/mitschlagel.bsky.social" target="_blank" rel="noopener noreferrer" aria-label="Bluesky">
+              <SiBluesky />
+            </SocialIconLink>
+            <SocialIconLink $isDark={isDark} href="https://www.last.fm/user/spormcer" target="_blank" rel="noopener noreferrer" aria-label="Last.fm">
+              <SiLastdotfm />
+            </SocialIconLink>
+          </SocialIconsContainer>
         </Header>
 
         {selectedPost ? (
@@ -365,25 +395,7 @@ const App: React.FC = () => {
           </PostList>
         )}
 
-        <Footer $isDark={isDark}>
-          <SocialLinks>
-            <SocialLink $isDark={isDark} href="https://github.com/mitschlagel" target="_blank" rel="noopener noreferrer">
-              GitHub
-            </SocialLink>
-            <SocialLink $isDark={isDark} href="https://www.linkedin.com/in/spencerljones" target="_blank" rel="noopener noreferrer">
-              LinkedIn
-            </SocialLink>
-            <SocialLink $isDark={isDark} href="https://www.instagram.com/mitschlagel" target="_blank" rel="noopener noreferrer">
-              Instagram
-            </SocialLink>
-            <SocialLink $isDark={isDark} href="https://bsky.app/profile/mitschlagel.bsky.social" target="_blank" rel="noopener noreferrer">
-              Bluesky
-            </SocialLink>
-            <SocialLink $isDark={isDark} href="https://www.last.fm/user/spormcer" target="_blank" rel="noopener noreferrer">
-              Last.fm
-            </SocialLink>
-          </SocialLinks>
-        </Footer>
+
       </Container>
     </>
   )

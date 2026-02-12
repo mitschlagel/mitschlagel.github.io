@@ -10,8 +10,8 @@ I wanted a simple, elegant way to write and publish blog posts without using a 3
 
 **Core Framework:**
 - React 18 with TypeScript
-- Vite for blazingly fast development
-- Styled Components for styling
+- Vite
+- Styled Components
 
 **Content Management:**
 - Markdown files with frontmatter
