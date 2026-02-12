@@ -376,10 +376,10 @@ const App: React.FC = () => {
             <SocialLink $isDark={isDark} href="https://www.instagram.com/mitschlagel" target="_blank" rel="noopener noreferrer">
               Instagram
             </SocialLink>
-            <SocialLink $isDark={isDark} href="#" target="_blank" rel="noopener noreferrer">
+            <SocialLink $isDark={isDark} href="https://bsky.app/profile/mitschlagel.bsky.social" target="_blank" rel="noopener noreferrer">
               Bluesky
             </SocialLink>
-            <SocialLink $isDark={isDark} href="#" target="_blank" rel="noopener noreferrer">
+            <SocialLink $isDark={isDark} href="https://www.last.fm/user/spormcer" target="_blank" rel="noopener noreferrer">
               Last.fm
             </SocialLink>
           </SocialLinks>
