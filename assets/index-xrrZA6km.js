@@ -321,8 +321,6 @@ date: "2026-02-12"
 slug: "dark-web-view"
 ---
 
-# Customizing Web Views with WKUserScript: Making Terms & Conditions Feel Native
-
 When embedding web content in iOS apps, maintaining a consistent user experience can be challenging—especially when it comes to respecting system appearance modes and matching your app's design language. Recently, I needed to display terms and conditions in a web view within a bottom sheet, and I wanted it to feel like a natural part of the app, not a jarring web page.
 
 ## The Challenge
