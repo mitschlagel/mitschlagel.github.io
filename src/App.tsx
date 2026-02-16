@@ -4,6 +4,7 @@ import { createGlobalStyle } from 'styled-components'
 import { useState, useEffect } from 'react'
 import matter from 'gray-matter'
 import { marked } from 'marked'
+import hljs from 'highlight.js'
 import headshot from './assets/img/headshot.png';
 import { Buffer } from 'buffer';
 import { SiGithub, SiLinkedin, SiInstagram, SiBluesky, SiLastdotfm } from 'react-icons/si';
@@ -11,6 +12,23 @@ import NowPlaying from './components/NowPlaying';
 
 // Make Buffer available globally for gray-matter
 window.Buffer = Buffer;
+
+// Configure marked with custom renderer for syntax highlighting
+const renderer = new marked.Renderer();
+renderer.code = function({ text, lang }: { text: string; lang?: string }) {
+  if (lang && hljs.getLanguage(lang)) {
+    try {
+      const highlighted = hljs.highlight(text, { language: lang }).value;
+      return `<pre><code class="hljs language-${lang}">${highlighted}</code></pre>`;
+    } catch (err) {
+      console.error('Highlight.js error:', err);
+    }
+  }
+  const highlighted = hljs.highlightAuto(text).value;
+  return `<pre><code class="hljs">${highlighted}</code></pre>`;
+};
+
+marked.setOptions({ renderer });
 
 const GlobalStyle = createGlobalStyle<{ $isDark: boolean }>`
   * {
@@ -161,38 +179,11 @@ const PostLink = styled.a<{ $isDark: boolean; $index: number; $total: number }>`
   cursor: pointer;
   
   &:hover {
-    // Calculate gradient position (0 = top, 1 = bottom)
-    ${props => {
-      const position = props.$total > 1 ? props.$index / (props.$total - 1) : 0;
-      
-      if (props.$isDark) {
-        // Dark mode: lightest at top, darkest at bottom
-        const bgLightness = Math.round(95 - (position * 90)); // 95% to 5%
-        // High contrast text: dark text on light bg, light text on dark bg
-        const textLightness = bgLightness > 50 ? 10 : 95;
-        return `
-          background: hsl(0, 0%, ${bgLightness}%);
-          color: hsl(0, 0%, ${textLightness}%);
-        `;
-      } else {
-        // Light mode: darkest at top, lightest at bottom
-        const bgLightness = Math.round(5 + (position * 93)); // 5% to 98%
-        // High contrast text: dark text on light bg, light text on dark bg
-        const textLightness = bgLightness > 50 ? 10 : 95;
-        return `
-          background: hsl(0, 0%, ${bgLightness}%);
-          color: hsl(0, 0%, ${textLightness}%);
-        `;
-      }
-    }}
+    background: ${props => props.$isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.02)'};
     padding-left: 8px;
     padding-right: 8px;
     margin-left: -8px;
     margin-right: -8px;
-    
-    span {
-      color: inherit;
-    }
   }
 
   @media (max-width: 768px) {
@@ -262,6 +253,66 @@ const Article = styled.article<{ $isDark: boolean }>`
   i {
     font-style: italic;
   }
+
+  code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: ${props => props.$isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'};
+  }
+
+  pre {
+    background: ${props => props.$isDark ? '#292A30' : '#F5F5F7'};
+    border: 1px solid ${props => props.$isDark ? '#404040' : '#e5e5e5'};
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 24px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    
+    code {
+      background: none;
+      padding: 0;
+      color: ${props => props.$isDark ? '#FFFFFF' : '#1D1D1F'};
+      font-size: 0.9em;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+  }
+
+  /* Swift/Xcode syntax highlighting */
+  pre code {
+    .comment { color: ${props => props.$isDark ? '#7F8C99' : '#78C2B3'}; }
+    .string { color: ${props => props.$isDark ? '#E8865E' : '#FF8170'}; }
+    .keyword { color: ${props => props.$isDark ? '#FF7AB2' : '#FF7AB2'}; }
+    .function { color: ${props => props.$isDark ? '#FF816F' : '#D9C97C'}; }
+    .class-name,
+    .type { color: ${props => props.$isDark ? '#29EEC6' : '#78C2B3'}; }
+    .number { color: ${props => props.$isDark ? '#B1D99D' : '#B281EB'}; }
+    .operator { color: ${props => props.$isDark ? '#FFFFFF' : '#1D1D1F'}; }
+    .punctuation { color: ${props => props.$isDark ? '#FFFFFF' : '#1D1D1F'}; }
+    .property { color: ${props => props.$isDark ? '#29EEC6' : '#78C2B3'}; }
+    .builtin { color: ${props => props.$isDark ? '#30A0FC' : '#4EB0CC'}; }
+    .attr-name { color: ${props => props.$isDark ? '#29EEC6' : '#78C2B3'}; }
+  }
+
+  /* Support for highlight.js classes */
+  pre code {
+    .hljs-comment { color: ${props => props.$isDark ? '#7F8C99' : '#78C2B3'}; }
+    .hljs-string { color: ${props => props.$isDark ? '#E8865E' : '#FF8170'}; }
+    .hljs-keyword { color: ${props => props.$isDark ? '#FF7AB2' : '#FF7AB2'}; }
+    .hljs-function { color: ${props => props.$isDark ? '#FF816F' : '#D9C97C'}; }
+    .hljs-title { color: ${props => props.$isDark ? '#FF816F' : '#D9C97C'}; }
+    .hljs-class { color: ${props => props.$isDark ? '#29EEC6' : '#78C2B3'}; }
+    .hljs-type { color: ${props => props.$isDark ? '#29EEC6' : '#78C2B3'}; }
+    .hljs-number { color: ${props => props.$isDark ? '#B1D99D' : '#B281EB'}; }
+    .hljs-built_in { color: ${props => props.$isDark ? '#30A0FC' : '#4EB0CC'}; }
+    .hljs-literal { color: ${props => props.$isDark ? '#B1D99D' : '#B281EB'}; }
+    .hljs-params { color: ${props => props.$isDark ? '#FFFFFF' : '#1D1D1F'}; }
+    .hljs-attr { color: ${props => props.$isDark ? '#29EEC6' : '#78C2B3'}; }
+  }
 `;
 
 const ArticleDate = styled.div<{ $isDark: boolean }>`
@@ -287,7 +338,7 @@ const loadPosts = (): Post[] => {
     .filter(([path]) => !path.includes('README.md')) // Exclude README
     .map(([_path, content], index) => {
       const { data, content: markdownContent } = matter(content as string);
-      const htmlContent = marked(markdownContent);
+      const htmlContent = marked.parse(markdownContent);
       
       return {
         id: index + 1,

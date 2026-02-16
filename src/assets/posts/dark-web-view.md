@@ -14,7 +14,7 @@ The terms and conditions page was simple HTML with plain text hosted in a CMS, a
 
 ## The Solution: WKUserScript
 
-Apple's `WKUserScript` provides a simple--and slightly more secure--way to inject custom JavaScript and CSS into web views before the page loads. Here's how I used it to solve both problems:
+`WKUserScript` provides a simple--and slightly more secure--way to inject custom JavaScript and CSS into web views before the page loads. Here's how I used it to solve both problems:
 
 ```swift
 import WebKit
