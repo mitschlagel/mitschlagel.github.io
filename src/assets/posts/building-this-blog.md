@@ -1,7 +1,7 @@
 ---
-title: "Building This Blog: The Laziest Approach"
+title: "Lazy Blog Building"
 date: "2026-02-10"
-slug: "building-this-blog"
+slug: "lazy-blog-building"
 ---
 
 I wanted a simple, elegant way to write and publish blog posts without using a 3rd party host or cms like wordpress.
