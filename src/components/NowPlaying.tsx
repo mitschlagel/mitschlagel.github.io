@@ -25,19 +25,6 @@ const NowPlayingLabel = styled.span<{ $isDark: boolean }>`
   white-space: nowrap;
 `;
 
-const AlbumArt = styled.img`
-  display: block;
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
-  min-height: 28px;
-  max-width: 28px;
-  max-height: 28px;
-  border-radius: 3px;
-  object-fit: cover;
-  flex-shrink: 0;
-`;
-
 const TrackWrapper = styled.div`
   display: flex;
   gap: 12px;
@@ -152,7 +139,20 @@ const NowPlaying: React.FC<NowPlayingProps> = ({ isDark }) => {
           {track.nowPlaying ? 'Now Playing' : 'Last Played'}
         </NowPlayingLabel>
         <TrackWrapper>
-          {track.albumArt && <AlbumArt src={track.albumArt} alt={`${track.album} album art`} />}
+          {track.albumArt && (
+            <img 
+              src={track.albumArt} 
+              alt={`${track.album} album art`}
+              style={{
+                display: 'block',
+                width: '28px',
+                height: '28px',
+                borderRadius: '3px',
+                objectFit: 'cover',
+                flexShrink: 0
+              }}
+            />
+          )}
           <TrackName $isDark={isDark}>
             <a href={track.url} target="_blank" rel="noopener noreferrer">
               {track.name}
