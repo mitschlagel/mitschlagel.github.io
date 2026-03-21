@@ -28,6 +28,8 @@ const NowPlayingLabel = styled.span<{ $isDark: boolean }>`
 const AlbumArt = styled.img`
   width: 28px;
   height: 28px;
+  max-width: 28px;
+  max-height: 28px;
   border-radius: 3px;
   object-fit: cover;
   flex-shrink: 0;
