@@ -7,6 +7,7 @@ import { marked } from 'marked'
 import hljs from 'highlight.js'
 import { Buffer } from 'buffer';
 import { SiGithub, SiLinkedin, SiInstagram, SiBluesky, SiLastdotfm } from 'react-icons/si';
+import { BsCircleHalf } from 'react-icons/bs';
 import NowPlaying from './components/NowPlaying';
 
 // Make Buffer available globally for gray-matter
@@ -38,27 +39,33 @@ const palette = {
 
 const theme = {
   light: {
-    bg: '#F4F8F8',
+    bg: '#EDF5F4',
     text: palette.charcoal,
-    mutedText: '#4B6668',
-    border: '#9EB9B9',
-    surface: '#E8F1F1',
-    interactiveSurface: '#DDEBEB',
+    mutedText: '#3E6264',
+    border: '#8DB4B0',
+    surface: '#DDECE9',
+    interactiveSurface: '#CFE6E2',
     accent: palette.deepTeal,
-    accentHover: '#044D55',
+    accentHover: '#044A52',
+    accentSoft: '#B8DCD6',
+    glowA: 'rgba(5, 94, 104, 0.18)',
+    glowB: 'rgba(98, 163, 136, 0.2)',
     codeInlineBg: '#E2ECEC',
     codeBlockBg: '#E7EFF0',
     codeBlockText: '#243536'
   },
   dark: {
-    bg: '#1F2626',
+    bg: '#1C2525',
     text: '#D9E7E7',
-    mutedText: palette.mist,
-    border: '#446366',
-    surface: '#2A3333',
-    interactiveSurface: '#364343',
+    mutedText: '#A8CAC7',
+    border: '#4D7A76',
+    surface: '#273736',
+    interactiveSurface: '#32504C',
     accent: palette.sage,
     accentHover: palette.mist,
+    accentSoft: '#2D4D48',
+    glowA: 'rgba(5, 94, 104, 0.28)',
+    glowB: 'rgba(98, 163, 136, 0.2)',
     codeInlineBg: '#334041',
     codeBlockBg: '#2A3435',
     codeBlockText: '#E4F0F0'
@@ -89,7 +96,10 @@ const GlobalStyle = createGlobalStyle<{ $isDark: boolean }>`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
-    background: ${props => colorToken(props.$isDark, 'bg')};
+    background:
+      radial-gradient(circle at 12% 0%, ${props => colorToken(props.$isDark, 'glowA')} 0%, transparent 42%),
+      radial-gradient(circle at 88% 8%, ${props => colorToken(props.$isDark, 'glowB')} 0%, transparent 38%),
+      ${props => colorToken(props.$isDark, 'bg')};
     color: ${props => colorToken(props.$isDark, 'text')};
     transition: background-color 0.3s ease, color 0.3s ease;
   }
@@ -128,29 +138,40 @@ const DarkModeToggle = styled.button<{ $isDark: boolean }>`
   position: fixed;
   top: 20px;
   right: 20px;
-  background: ${props => colorToken(props.$isDark, 'surface')};
-  border: 1px solid ${props => colorToken(props.$isDark, 'border')};
-  color: ${props => colorToken(props.$isDark, 'text')};
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: ${props => colorToken(props.$isDark, 'mutedText')};
+  padding: 6px 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 22px;
+  line-height: 1;
   transition: all 0.3s ease;
   z-index: 1000;
   
   &:hover {
-    background: ${props => colorToken(props.$isDark, 'interactiveSurface')};
-    transform: scale(1.1);
+    color: ${palette.sage};
+    transform: translateY(-1px) scale(1.05);
+    text-shadow: 0 0 10px ${props => colorToken(props.$isDark, 'accentSoft')};
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${props => colorToken(props.$isDark, 'accent')};
+    outline-offset: 4px;
+  }
+
+  svg {
+    width: 22px;
+    height: 22px;
   }
 `;
 
-const Header = styled.header`
+const Header = styled.header<{ $isDark: boolean }>`
   width: 100%;
   margin-bottom: 60px;
+  padding-bottom: 12px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -183,7 +204,7 @@ const Name = styled.h1<{ $isDark: boolean }>`
   font-size: 24px;
   font-weight: 600;
   margin: 0;
-  color: ${props => colorToken(props.$isDark, 'text')};
+  color: ${props => colorToken(props.$isDark, 'accent')};
   transition: color 0.3s ease;
 
   @media (max-width: 768px) {
@@ -224,7 +245,7 @@ const SocialIconLink = styled.a<{ $isDark: boolean }>`
   justify-content: center;
   
   &:hover {
-    color: ${props => colorToken(props.$isDark, 'accent')};
+    color: ${palette.sage};
     transform: translateY(-2px);
   }
   
@@ -251,6 +272,7 @@ const PostLink = styled.a<{ $isDark: boolean; $index: number; $total: number }>`
   
   &:hover {
     background: ${props => colorToken(props.$isDark, 'interactiveSurface')};
+    box-shadow: inset 3px 0 0 ${props => colorToken(props.$isDark, 'accent')};
     padding-left: 8px;
     padding-right: 8px;
     margin-left: -8px;
@@ -272,7 +294,7 @@ const PostTitle = styled.span<{ $isDark: boolean }>`
 
 const PostDate = styled.span<{ $isDark: boolean }>`
   font-size: 14px;
-  color: ${props => colorToken(props.$isDark, 'mutedText')};
+  color: ${props => colorToken(props.$isDark, 'accent')};
   font-weight: 400;
   white-space: nowrap;
   margin-left: 16px;
@@ -500,10 +522,10 @@ const App: React.FC = () => {
       <GlobalStyle $isDark={isDark} />
       <Container>
         <DarkModeToggle $isDark={isDark} onClick={toggleDarkMode}>
-          {isDark ? '☼' : '☽'}
+          <BsCircleHalf aria-hidden="true" />
         </DarkModeToggle>
         
-        <Header>
+        <Header $isDark={isDark}>
           <HeaderClickable onClick={handleHomeClick}>
             <Name $isDark={isDark}>spencerjones.studio</Name>
             <Tagline $isDark={isDark}>software engineer, musician</Tagline>
