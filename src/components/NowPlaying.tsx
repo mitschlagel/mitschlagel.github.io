@@ -2,9 +2,13 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const NowPlayingContainer = styled.div<{ $isDark: boolean }>`
-  margin-top: 80px;
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
+  z-index: 10;
 `;
 
 const NowPlayingContent = styled.div`
@@ -23,6 +27,15 @@ const NowPlayingLabel = styled.span<{ $isDark: boolean }>`
   font-size: 14px;
   color: ${props => props.$isDark ? '#999' : '#666'};
   white-space: nowrap;
+`;
+
+const AlbumArt = styled.img`
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  object-fit: cover;
+  flex-shrink: 0;
 `;
 
 const TrackWrapper = styled.div`
@@ -139,20 +152,7 @@ const NowPlaying: React.FC<NowPlayingProps> = ({ isDark }) => {
           {track.nowPlaying ? 'Now Playing' : 'Last Played'}
         </NowPlayingLabel>
         <TrackWrapper>
-          {track.albumArt && (
-            <img 
-              src={track.albumArt} 
-              alt={`${track.album} album art`}
-              style={{
-                display: 'block',
-                width: '28px',
-                height: '28px',
-                borderRadius: '3px',
-                objectFit: 'cover',
-                flexShrink: 0
-              }}
-            />
-          )}
+          {track.albumArt && <AlbumArt src={track.albumArt} alt={`${track.album} album art`} />}
           <TrackName $isDark={isDark}>
             <a href={track.url} target="_blank" rel="noopener noreferrer">
               {track.name}
