@@ -13,18 +13,16 @@ const NowPlayingContainer = styled.div<{ $isDark: boolean }>`
 
 const NowPlayingContent = styled.div`
   display: flex;
-  gap: 12px;
+  flex-direction: column;
   align-items: center;
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
-  }
+  gap: 8px;
+  padding-top: 12px;
+  text-align: center;
 `;
 
+
 const NowPlayingLabel = styled.span<{ $isDark: boolean }>`
-  font-size: 14px;
+  font-size: 12px;
   color: ${props => props.$isDark ? '#999' : '#666'};
   white-space: nowrap;
 `;
@@ -45,7 +43,7 @@ const TrackWrapper = styled.div`
 `;
 
 const TrackName = styled.span<{ $isDark: boolean }>`
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
   
@@ -60,12 +58,12 @@ const TrackName = styled.span<{ $isDark: boolean }>`
 `;
 
 const ArtistName = styled.span<{ $isDark: boolean }>`
-  font-size: 14px;
+  font-size: 12px;
   color: ${props => props.$isDark ? '#999' : '#666'};
 `;
 
 const NotPlaying = styled.div<{ $isDark: boolean }>`
-  font-size: 14px;
+  font-size: 12px;
   color: ${props => props.$isDark ? '#666' : '#999'};
 `;
 
