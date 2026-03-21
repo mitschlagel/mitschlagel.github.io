@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react'
 import matter from 'gray-matter'
 import { marked } from 'marked'
 import hljs from 'highlight.js'
-import headshot from './assets/img/headshot.png';
 import { Buffer } from 'buffer';
 import { SiGithub, SiLinkedin, SiInstagram, SiBluesky, SiLastdotfm } from 'react-icons/si';
 import NowPlaying from './components/NowPlaying';
@@ -30,7 +29,53 @@ renderer.code = function({ text, lang }: { text: string; lang?: string }) {
 
 marked.setOptions({ renderer });
 
+const palette = {
+  charcoal: '#343434',
+  deepTeal: '#055E68',
+  sage: '#62A388',
+  mist: '#B9D2D2'
+};
+
+const theme = {
+  light: {
+    bg: '#F4F8F8',
+    text: palette.charcoal,
+    mutedText: '#4B6668',
+    border: '#9EB9B9',
+    surface: '#E8F1F1',
+    interactiveSurface: '#DDEBEB',
+    accent: palette.deepTeal,
+    accentHover: '#044D55',
+    codeInlineBg: '#E2ECEC',
+    codeBlockBg: '#E7EFF0',
+    codeBlockText: '#243536'
+  },
+  dark: {
+    bg: '#1F2626',
+    text: '#D9E7E7',
+    mutedText: palette.mist,
+    border: '#446366',
+    surface: '#2A3333',
+    interactiveSurface: '#364343',
+    accent: palette.sage,
+    accentHover: palette.mist,
+    codeInlineBg: '#334041',
+    codeBlockBg: '#2A3435',
+    codeBlockText: '#E4F0F0'
+  }
+};
+
+type ThemeMode = keyof typeof theme;
+type ThemeToken = keyof (typeof theme)['light'];
+
+const colorToken = (isDark: boolean, token: ThemeToken): string => {
+  const mode: ThemeMode = isDark ? 'dark' : 'light';
+  return theme[mode][token];
+};
+
 const GlobalStyle = createGlobalStyle<{ $isDark: boolean }>`
+  @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&display=swap');
+
   * {
     margin: 0;
     padding: 0;
@@ -40,21 +85,29 @@ const GlobalStyle = createGlobalStyle<{ $isDark: boolean }>`
   body {
     margin: 0;
     padding: 0;
-    font-family: 'Fira Code', monospace;
+    font-family: 'Geist Mono', monospace;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
-    background: ${props => props.$isDark ? '#1a1a1a' : '#ffffff'};
-    color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
+    background: ${props => colorToken(props.$isDark, 'bg')};
+    color: ${props => colorToken(props.$isDark, 'text')};
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Geist Mono', monospace;
+  }
+
+  code, pre, kbd, samp {
+    font-family: 'Geist Mono', monospace;
+  }
+
   a {
-    color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
+    color: ${props => colorToken(props.$isDark, 'accent')};
     text-decoration: none;
     
     &:hover {
-      color: ${props => props.$isDark ? '#999' : '#666'};
+      color: ${props => colorToken(props.$isDark, 'accentHover')};
     }
   }
 `;
@@ -75,9 +128,9 @@ const DarkModeToggle = styled.button<{ $isDark: boolean }>`
   position: fixed;
   top: 20px;
   right: 20px;
-  background: ${props => props.$isDark ? '#2a2a2a' : '#f5f5f5'};
-  border: 1px solid ${props => props.$isDark ? '#404040' : '#e5e5e5'};
-  color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
+  background: ${props => colorToken(props.$isDark, 'surface')};
+  border: 1px solid ${props => colorToken(props.$isDark, 'border')};
+  color: ${props => colorToken(props.$isDark, 'text')};
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -90,49 +143,57 @@ const DarkModeToggle = styled.button<{ $isDark: boolean }>`
   z-index: 1000;
   
   &:hover {
-    background: ${props => props.$isDark ? '#333' : '#e5e5e5'};
+    background: ${props => colorToken(props.$isDark, 'interactiveSurface')};
     transform: scale(1.1);
   }
 `;
 
 const Header = styled.header`
+  width: 100%;
   margin-bottom: 60px;
-  text-align: center;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const HeaderClickable = styled.div`
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  gap: 0;
   
   &:hover h1 {
-    color: #666;
+    opacity: 0.85;
   }
-`;
 
-const ProfileImage = styled.img`
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 20px;
+  @media (max-width: 768px) {
+    align-items: center;
+  }
 `;
 
 const Name = styled.h1<{ $isDark: boolean }>`
   font-size: 24px;
   font-weight: 600;
-  margin: 0 0 8px 0;
-  color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
+  margin: 0;
+  color: ${props => colorToken(props.$isDark, 'text')};
   transition: color 0.3s ease;
+
+  @media (max-width: 768px) {
+    margin: 0 0 8px 0;
+  }
 `;
 
 const Tagline = styled.p<{ $isDark: boolean }>`
   font-size: 16px;
-  color: ${props => props.$isDark ? '#999' : '#666'};
+  color: ${props => colorToken(props.$isDark, 'mutedText')};
   margin: 0;
   font-weight: 400;
   transition: color 0.3s ease;
@@ -140,20 +201,30 @@ const Tagline = styled.p<{ $isDark: boolean }>`
 
 const SocialIconsContainer = styled.div`
   display: flex;
+  justify-content: flex-start;
   gap: 16px;
-  margin-top: 16px;
+  margin-top: 0;
+  padding-top: 10px;
   align-items: center;
+  align-self: flex-start;
+
+  @media (max-width: 768px) {
+    padding-top: 0;
+    align-self: auto;
+    justify-content: center;
+    margin-top: 16px;
+  }
 `;
 
 const SocialIconLink = styled.a<{ $isDark: boolean }>`
-  color: ${props => props.$isDark ? '#999' : '#666'};
+  color: ${props => colorToken(props.$isDark, 'mutedText')};
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   
   &:hover {
-    color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
+    color: ${props => colorToken(props.$isDark, 'accent')};
     transform: translateY(-2px);
   }
   
@@ -174,12 +245,12 @@ const PostLink = styled.a<{ $isDark: boolean; $index: number; $total: number }>`
   justify-content: space-between;
   align-items: baseline;
   padding: 12px 0;
-  border-bottom: 1px solid ${props => props.$isDark ? '#404040' : '#e5e5e5'};
+  border-bottom: 1px solid ${props => colorToken(props.$isDark, 'border')};
   transition: all 0.2s ease;
   cursor: pointer;
   
   &:hover {
-    background: ${props => props.$isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.02)'};
+    background: ${props => colorToken(props.$isDark, 'interactiveSurface')};
     padding-left: 8px;
     padding-right: 8px;
     margin-left: -8px;
@@ -195,13 +266,13 @@ const PostLink = styled.a<{ $isDark: boolean; $index: number; $total: number }>`
 
 const PostTitle = styled.span<{ $isDark: boolean }>`
   font-size: 16px;
-  color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
+  color: ${props => colorToken(props.$isDark, 'text')};
   font-weight: 500;
 `;
 
 const PostDate = styled.span<{ $isDark: boolean }>`
   font-size: 14px;
-  color: ${props => props.$isDark ? '#666' : '#999'};
+  color: ${props => colorToken(props.$isDark, 'mutedText')};
   font-weight: 400;
   white-space: nowrap;
   margin-left: 16px;
@@ -218,35 +289,35 @@ const Article = styled.article<{ $isDark: boolean }>`
     font-size: 32px;
     font-weight: 600;
     margin: 0 0 8px 0;
-    color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
+    color: ${props => colorToken(props.$isDark, 'text')};
   }
   
   h2 {
     font-size: 24px;
     font-weight: 600;
     margin: 40px 0 16px 0;
-    color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
+    color: ${props => colorToken(props.$isDark, 'text')};
   }
   
   h3 {
     font-size: 20px;
     font-weight: 600;
     margin: 32px 0 12px 0;
-    color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
+    color: ${props => colorToken(props.$isDark, 'text')};
   }
   
   p {
     margin: 16px 0;
     line-height: 1.7;
-    color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
+    color: ${props => colorToken(props.$isDark, 'text')};
   }
   
   a {
-    color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
+    color: ${props => colorToken(props.$isDark, 'accent')};
     text-decoration: underline;
     
     &:hover {
-      color: ${props => props.$isDark ? '#999' : '#666'};
+      color: ${props => colorToken(props.$isDark, 'accentHover')};
     }
   }
   
@@ -255,16 +326,16 @@ const Article = styled.article<{ $isDark: boolean }>`
   }
 
   code {
-    font-family: 'Fira Code', monospace;
+    font-family: 'Geist Mono', monospace;
     font-size: 0.9em;
     padding: 2px 6px;
     border-radius: 3px;
-    background: ${props => props.$isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'};
+    background: ${props => colorToken(props.$isDark, 'codeInlineBg')};
   }
 
   pre {
-    background: ${props => props.$isDark ? '#292A30' : '#F5F5F7'};
-    border: 1px solid ${props => props.$isDark ? '#404040' : '#e5e5e5'};
+    background: ${props => colorToken(props.$isDark, 'codeBlockBg')};
+    border: 1px solid ${props => colorToken(props.$isDark, 'border')};
     border-radius: 6px;
     padding: 16px;
     overflow-x: auto;
@@ -275,7 +346,7 @@ const Article = styled.article<{ $isDark: boolean }>`
     code {
       background: none;
       padding: 0;
-      color: ${props => props.$isDark ? '#FFFFFF' : '#1D1D1F'};
+      color: ${props => colorToken(props.$isDark, 'codeBlockText')};
       font-size: 0.9em;
       line-height: 1.6;
       white-space: pre-wrap;
@@ -317,7 +388,7 @@ const Article = styled.article<{ $isDark: boolean }>`
 
 const ArticleDate = styled.div<{ $isDark: boolean }>`
   font-size: 14px;
-  color: ${props => props.$isDark ? '#666' : '#999'};
+  color: ${props => colorToken(props.$isDark, 'mutedText')};
   margin-bottom: 40px;
 `;
 
@@ -434,9 +505,8 @@ const App: React.FC = () => {
         
         <Header>
           <HeaderClickable onClick={handleHomeClick}>
-            <ProfileImage src={headshot} alt="Spencer Jones" />
             <Name $isDark={isDark}>spencerjones.studio</Name>
-            <Tagline $isDark={isDark}>Software Engineer, Musician</Tagline>
+            <Tagline $isDark={isDark}>software engineer, musician</Tagline>
           </HeaderClickable>
           <SocialIconsContainer>
             <SocialIconLink $isDark={isDark} href="https://github.com/mitschlagel" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
