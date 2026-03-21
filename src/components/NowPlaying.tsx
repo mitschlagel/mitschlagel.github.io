@@ -27,21 +27,6 @@ const NowPlayingLabel = styled.span<{ $isDark: boolean }>`
   white-space: nowrap;
 `;
 
-const AlbumArt = styled.img`
-  display: block;
-  width: 28px;
-  height: 28px;
-  border-radius: 3px;
-  object-fit: cover;
-  flex-shrink: 0;
-`;
-
-const TrackWrapper = styled.div`
-  display: flex;
-  gap: 12px;
-  align-items: center;
-`;
-
 const TrackName = styled.span<{ $isDark: boolean }>`
   font-size: 12px;
   font-weight: 600;
@@ -149,14 +134,25 @@ const NowPlaying: React.FC<NowPlayingProps> = ({ isDark }) => {
         <NowPlayingLabel $isDark={isDark}>
           {track.nowPlaying ? 'Now Playing' : 'Last Played'}
         </NowPlayingLabel>
-        <TrackWrapper>
-          {track.albumArt && <AlbumArt src={track.albumArt} alt={`${track.album} album art`} />}
-          <TrackName $isDark={isDark}>
-            <a href={track.url} target="_blank" rel="noopener noreferrer">
-              {track.name}
-            </a>
-          </TrackName>
-        </TrackWrapper>
+        {track.albumArt && (
+          <img 
+            src={track.albumArt} 
+            alt={`${track.album} album art`}
+            style={{
+              display: 'block',
+              width: '28px',
+              height: '28px',
+              borderRadius: '3px',
+              objectFit: 'cover',
+              flexShrink: 0
+            }}
+          />
+        )}
+        <TrackName $isDark={isDark}>
+          <a href={track.url} target="_blank" rel="noopener noreferrer">
+            {track.name}
+          </a>
+        </TrackName>
         <ArtistName $isDark={isDark}>{track.artist}</ArtistName>
       </NowPlayingContent>
     </NowPlayingContainer>
