@@ -81,7 +81,7 @@ const colorToken = (isDark: boolean, token: ThemeToken): string => {
 };
 
 const GlobalStyle = createGlobalStyle<{ $isDark: boolean }>`
-  @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@400;500;600;700&display=swap');
 
   * {
     margin: 0;
@@ -92,7 +92,7 @@ const GlobalStyle = createGlobalStyle<{ $isDark: boolean }>`
   body {
     margin: 0;
     padding: 0;
-    font-family: 'Geist Mono', monospace;
+    font-family: 'Reddit Mono', monospace;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
@@ -105,11 +105,11 @@ const GlobalStyle = createGlobalStyle<{ $isDark: boolean }>`
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Geist Mono', monospace;
+    font-family: 'Reddit Mono', monospace;
   }
 
   code, pre, kbd, samp {
-    font-family: 'Geist Mono', monospace;
+    font-family: 'Reddit Mono', monospace;
   }
 
   a {
@@ -348,7 +348,7 @@ const Article = styled.article<{ $isDark: boolean }>`
   }
 
   code {
-    font-family: 'Geist Mono', monospace;
+    font-family: 'Reddit Mono', monospace;
     font-size: 0.9em;
     padding: 2px 6px;
     border-radius: 3px;
