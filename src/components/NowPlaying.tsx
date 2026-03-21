@@ -2,22 +2,21 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const NowPlayingContainer = styled.div<{ $isDark: boolean }>`
-  position: fixed;
-  bottom: 20px;
-  left: 0;
-  right: 0;
+  margin-top: 80px;
   display: flex;
   justify-content: center;
-  z-index: 10;
 `;
 
 const NowPlayingContent = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding-top: 12px;
-  text-align: center;
+  gap: 12px;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
 `;
 
 
