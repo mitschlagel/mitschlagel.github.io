@@ -2,32 +2,22 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const NowPlayingContainer = styled.div<{ $isDark: boolean }>`
-  margin-top: 80px;
-  display: flex;
-  justify-content: center;
+  width: 100%;
 `;
 
 const NowPlayingContent = styled.div`
   display: flex;
-  align-items: center;
-  gap: 12px;
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
-  }
 `;
 
 
 const NowPlayingLabel = styled.span<{ $isDark: boolean }>`
-  font-size: 12px;
+  font-size: 11px;
   color: ${props => props.$isDark ? '#999' : '#666'};
   white-space: nowrap;
 `;
 
 const TrackName = styled.span<{ $isDark: boolean }>`
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
   
@@ -42,12 +32,12 @@ const TrackName = styled.span<{ $isDark: boolean }>`
 `;
 
 const ArtistName = styled.span<{ $isDark: boolean }>`
-  font-size: 12px;
+  font-size: 11px;
   color: ${props => props.$isDark ? '#999' : '#666'};
 `;
 
 const NotPlaying = styled.div<{ $isDark: boolean }>`
-  font-size: 12px;
+  font-size: 11px;
   color: ${props => props.$isDark ? '#666' : '#999'};
 `;
 
@@ -67,6 +57,7 @@ interface NowPlayingProps {
 const NowPlaying: React.FC<NowPlayingProps> = ({ isDark }) => {
   const [track, setTrack] = useState<Track | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   const fetchNowPlaying = async () => {
     try {
@@ -115,6 +106,18 @@ const NowPlaying: React.FC<NowPlayingProps> = ({ isDark }) => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    const updateMobileState = (event: MediaQueryListEvent | MediaQueryList) => {
+      setIsMobile(event.matches);
+    };
+
+    updateMobileState(mediaQuery);
+    mediaQuery.addEventListener('change', updateMobileState);
+
+    return () => mediaQuery.removeEventListener('change', updateMobileState);
+  }, []);
+
   if (loading) {
     return null;
   }
@@ -128,8 +131,25 @@ const NowPlaying: React.FC<NowPlayingProps> = ({ isDark }) => {
   }
 
   return (
-    <NowPlayingContainer $isDark={isDark}>
-      <NowPlayingContent>
+    <NowPlayingContainer
+      $isDark={isDark}
+      style={{
+        marginTop: '80px',
+        paddingTop: '20px',
+        display: 'flex',
+        justifyContent: 'center'
+      }}
+    >
+      <NowPlayingContent
+        style={{
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: isMobile ? '8px' : '12px',
+          textAlign: 'center'
+        }}
+      >
         <NowPlayingLabel $isDark={isDark}>
           {track.nowPlaying ? 'Now Playing' : 'Last Played'}
         </NowPlayingLabel>
