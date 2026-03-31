@@ -4,12 +4,12 @@ html, body {
   margin: 0;
   padding: 0;
   
-  font-family: 'Fira Code', monospace;
+  font-family: 'Source Sans Pro', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light;
-  background-color: #ffffff;
+  color-scheme: light dark;
+  background-color: #f2f1ef;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,5 +18,5 @@ html, body {
 }
 
 body {
-  background-color: #ffffff;
+  background-color: #f2f1ef;
 }

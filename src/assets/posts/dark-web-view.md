@@ -1,14 +1,16 @@
 ---
-title: "Dark Web View"
+title: "Styling Web Views"
 date: "2026-02-12"
-slug: "dark-web-view"
+slug: "styling-web-views"
 ---
 
 When embedding web content in iOS apps, maintaining a consistent user experience can be challenging—especially when it comes to respecting system appearance modes and matching your app's design language. Recently, I needed to display terms and conditions in a web view within a bottom sheet, and I wanted it to feel like a natural part of the app, not a jarring web page.
 
 The terms and conditions page was simple HTML with plain text hosted in a CMS, and it had two major issues:
-- It didn't respect dark mode, staying bright white even when the app was in dark mode
-- The typography didn't match the app's design, making it obvious this was embedded web content
+
+**1.** It didn't respect dark mode, staying bright white even when the app was in dark mode
+
+**2.** The typography didn't match the app's design, making it obvious this was embedded web content
 
 `WKUserScript` provides a simple--and slightly more secure--way to inject custom JavaScript and CSS into web views before the page loads. Here's how I used it to solve both problems:
 

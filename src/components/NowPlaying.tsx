@@ -12,33 +12,33 @@ const NowPlayingContent = styled.div`
 
 const NowPlayingLabel = styled.span<{ $isDark: boolean }>`
   font-size: 11px;
-  color: ${props => props.$isDark ? '#999' : '#666'};
+  color: ${props => props.$isDark ? '#A4A7A4' : '#6D6D69'};
   white-space: nowrap;
 `;
 
 const TrackName = styled.span<{ $isDark: boolean }>`
   font-size: 11px;
   font-weight: 600;
-  color: ${props => props.$isDark ? '#e5e5e5' : '#1a1a1a'};
+  color: ${props => props.$isDark ? '#C5C9C7' : '#545464'};
   
   a {
     color: inherit;
     text-decoration: none;
     
     &:hover {
-      color: ${props => props.$isDark ? '#999' : '#666'};
+      color: ${props => props.$isDark ? '#8ba4b0' : '#4d699b'};
     }
   }
 `;
 
 const ArtistName = styled.span<{ $isDark: boolean }>`
   font-size: 11px;
-  color: ${props => props.$isDark ? '#999' : '#666'};
+  color: ${props => props.$isDark ? '#A4A7A4' : '#6D6D69'};
 `;
 
 const NotPlaying = styled.div<{ $isDark: boolean }>`
   font-size: 11px;
-  color: ${props => props.$isDark ? '#666' : '#999'};
+  color: ${props => props.$isDark ? '#5C6066' : '#9F9F99'};
 `;
 
 interface Track {

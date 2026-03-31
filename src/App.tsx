@@ -31,44 +31,56 @@ renderer.code = function({ text, lang }: { text: string; lang?: string }) {
 marked.setOptions({ renderer });
 
 const palette = {
-  charcoal: '#343434',
-  deepTeal: '#055E68',
-  sage: '#62A388',
-  mist: '#B9D2D2'
+  // Kanso Ink (dark) base
+  inkBg0: '#14171d',
+  inkBg1: '#1f1f26',
+  inkBg2: '#22262D',
+  inkBg3: '#393B44',
+  inkBg4: '#4b4e57',
+  // Kanso Pearl (light) base
+  pearlWhite0: '#f2f1ef',
+  pearlWhite1: '#e2e1df',
+  pearlWhite2: '#dddddb',
+  pearlWhite3: '#cacac7',
+  // Accents
+  blue3: '#8ba4b0',
+  blue: '#7FB4CA',
+  pearlBlue4: '#4d699b',
+  pearlBlue5: '#5d57a3',
 };
 
 const theme = {
   light: {
-    bg: '#EDF5F4',
-    text: palette.charcoal,
-    mutedText: '#3E6264',
-    border: '#8DB4B0',
-    surface: '#DDECE9',
-    interactiveSurface: '#CFE6E2',
-    accent: palette.deepTeal,
-    accentHover: '#044A52',
-    accentSoft: '#B8DCD6',
-    glowA: 'rgba(5, 94, 104, 0.18)',
-    glowB: 'rgba(98, 163, 136, 0.2)',
-    codeInlineBg: '#E2ECEC',
-    codeBlockBg: '#E7EFF0',
-    codeBlockText: '#243536'
+    bg: palette.pearlWhite0,
+    text: '#545464',
+    mutedText: '#6D6D69',
+    border: palette.pearlWhite3,
+    surface: palette.pearlWhite1,
+    interactiveSurface: palette.pearlWhite2,
+    accent: palette.pearlBlue4,
+    accentHover: palette.pearlBlue5,
+    accentSoft: '#c7d7e0',
+    glowA: 'rgba(77, 105, 155, 0.10)',
+    glowB: 'rgba(93, 87, 163, 0.08)',
+    codeInlineBg: palette.pearlWhite2,
+    codeBlockBg: palette.pearlWhite1,
+    codeBlockText: '#545464'
   },
   dark: {
-    bg: '#1C2525',
-    text: '#D9E7E7',
-    mutedText: '#A8CAC7',
-    border: '#4D7A76',
-    surface: '#273736',
-    interactiveSurface: '#32504C',
-    accent: palette.sage,
-    accentHover: palette.mist,
-    accentSoft: '#2D4D48',
-    glowA: 'rgba(5, 94, 104, 0.28)',
-    glowB: 'rgba(98, 163, 136, 0.2)',
-    codeInlineBg: '#334041',
-    codeBlockBg: '#2A3435',
-    codeBlockText: '#E4F0F0'
+    bg: palette.inkBg0,
+    text: '#C5C9C7',
+    mutedText: '#A4A7A4',
+    border: palette.inkBg3,
+    surface: palette.inkBg1,
+    interactiveSurface: palette.inkBg2,
+    accent: palette.blue3,
+    accentHover: palette.blue,
+    accentSoft: '#2D4F67',
+    glowA: 'rgba(147, 138, 169, 0.12)',
+    glowB: 'rgba(139, 164, 176, 0.10)',
+    codeInlineBg: palette.inkBg1,
+    codeBlockBg: palette.inkBg1,
+    codeBlockText: '#C5C9C7'
   }
 };
 
@@ -81,8 +93,6 @@ const colorToken = (isDark: boolean, token: ThemeToken): string => {
 };
 
 const GlobalStyle = createGlobalStyle<{ $isDark: boolean }>`
-  @import url('https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@400;500;600;700&display=swap');
-
   * {
     margin: 0;
     padding: 0;
@@ -92,7 +102,7 @@ const GlobalStyle = createGlobalStyle<{ $isDark: boolean }>`
   body {
     margin: 0;
     padding: 0;
-    font-family: 'Reddit Mono', monospace;
+    font-family: 'Source Sans Pro', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
@@ -105,11 +115,11 @@ const GlobalStyle = createGlobalStyle<{ $isDark: boolean }>`
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Reddit Mono', monospace;
+    font-family: 'Alegreya', serif;
   }
 
   code, pre, kbd, samp {
-    font-family: 'Reddit Mono', monospace;
+    font-family: 'Source Code Pro', monospace;
   }
 
   a {
@@ -152,7 +162,7 @@ const DarkModeToggle = styled.button<{ $isDark: boolean }>`
   z-index: 1000;
   
   &:hover {
-    color: ${palette.sage};
+    color: ${props => colorToken(props.$isDark, 'accent')};
     transform: translateY(-1px) scale(1.05);
     text-shadow: 0 0 10px ${props => colorToken(props.$isDark, 'accentSoft')};
   }
@@ -170,7 +180,7 @@ const DarkModeToggle = styled.button<{ $isDark: boolean }>`
 
 const Header = styled.header<{ $isDark: boolean }>`
   width: 100%;
-  margin-bottom: 60px;
+  margin-bottom: 24px;
   padding-bottom: 12px;
   display: flex;
   flex-direction: row;
@@ -201,7 +211,7 @@ const HeaderClickable = styled.div`
 `;
 
 const Name = styled.h1<{ $isDark: boolean }>`
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 600;
   margin: 0;
   color: ${props => colorToken(props.$isDark, 'accent')};
@@ -225,7 +235,7 @@ const SocialIconsContainer = styled.div`
   justify-content: flex-start;
   gap: 16px;
   margin-top: 0;
-  padding-top: 10px;
+  padding-top: 16px;
   align-items: center;
   align-self: flex-start;
 
@@ -245,7 +255,7 @@ const SocialIconLink = styled.a<{ $isDark: boolean }>`
   justify-content: center;
   
   &:hover {
-    color: ${palette.sage};
+    color: ${props => colorToken(props.$isDark, 'accent')};
     transform: translateY(-2px);
   }
   
@@ -348,7 +358,7 @@ const Article = styled.article<{ $isDark: boolean }>`
   }
 
   code {
-    font-family: 'Reddit Mono', monospace;
+    font-family: 'Source Code Pro', monospace;
     font-size: 0.9em;
     padding: 2px 6px;
     border-radius: 3px;
@@ -375,36 +385,36 @@ const Article = styled.article<{ $isDark: boolean }>`
     }
   }
 
-  /* Swift/Xcode syntax highlighting */
+  /* Kanso syntax highlighting */
   pre code {
-    .comment { color: ${props => props.$isDark ? '#7F8C99' : '#78C2B3'}; }
-    .string { color: ${props => props.$isDark ? '#E8865E' : '#FF8170'}; }
-    .keyword { color: ${props => props.$isDark ? '#FF7AB2' : '#FF7AB2'}; }
-    .function { color: ${props => props.$isDark ? '#FF816F' : '#D9C97C'}; }
+    .comment { color: ${props => props.$isDark ? '#717C7C' : '#9F9F99'}; }
+    .string { color: ${props => props.$isDark ? '#98BB6C' : '#6f894e'}; }
+    .keyword { color: ${props => props.$isDark ? '#938AA9' : '#b35b79'}; }
+    .function { color: ${props => props.$isDark ? '#7FB4CA' : '#4d699b'}; }
     .class-name,
-    .type { color: ${props => props.$isDark ? '#29EEC6' : '#78C2B3'}; }
-    .number { color: ${props => props.$isDark ? '#B1D99D' : '#B281EB'}; }
-    .operator { color: ${props => props.$isDark ? '#FFFFFF' : '#1D1D1F'}; }
-    .punctuation { color: ${props => props.$isDark ? '#FFFFFF' : '#1D1D1F'}; }
-    .property { color: ${props => props.$isDark ? '#29EEC6' : '#78C2B3'}; }
-    .builtin { color: ${props => props.$isDark ? '#30A0FC' : '#4EB0CC'}; }
-    .attr-name { color: ${props => props.$isDark ? '#29EEC6' : '#78C2B3'}; }
+    .type { color: ${props => props.$isDark ? '#7AA89F' : '#597b75'}; }
+    .number { color: ${props => props.$isDark ? '#DCA561' : '#cc6d00'}; }
+    .operator { color: ${props => props.$isDark ? '#C5C9C7' : '#545464'}; }
+    .punctuation { color: ${props => props.$isDark ? '#C5C9C7' : '#545464'}; }
+    .property { color: ${props => props.$isDark ? '#7AA89F' : '#597b75'}; }
+    .builtin { color: ${props => props.$isDark ? '#E46876' : '#c84053'}; }
+    .attr-name { color: ${props => props.$isDark ? '#DCA561' : '#77713f'}; }
   }
 
   /* Support for highlight.js classes */
   pre code {
-    .hljs-comment { color: ${props => props.$isDark ? '#7F8C99' : '#78C2B3'}; }
-    .hljs-string { color: ${props => props.$isDark ? '#E8865E' : '#FF8170'}; }
-    .hljs-keyword { color: ${props => props.$isDark ? '#FF7AB2' : '#FF7AB2'}; }
-    .hljs-function { color: ${props => props.$isDark ? '#FF816F' : '#D9C97C'}; }
-    .hljs-title { color: ${props => props.$isDark ? '#FF816F' : '#D9C97C'}; }
-    .hljs-class { color: ${props => props.$isDark ? '#29EEC6' : '#78C2B3'}; }
-    .hljs-type { color: ${props => props.$isDark ? '#29EEC6' : '#78C2B3'}; }
-    .hljs-number { color: ${props => props.$isDark ? '#B1D99D' : '#B281EB'}; }
-    .hljs-built_in { color: ${props => props.$isDark ? '#30A0FC' : '#4EB0CC'}; }
-    .hljs-literal { color: ${props => props.$isDark ? '#B1D99D' : '#B281EB'}; }
-    .hljs-params { color: ${props => props.$isDark ? '#FFFFFF' : '#1D1D1F'}; }
-    .hljs-attr { color: ${props => props.$isDark ? '#29EEC6' : '#78C2B3'}; }
+    .hljs-comment { color: ${props => props.$isDark ? '#717C7C' : '#9F9F99'}; }
+    .hljs-string { color: ${props => props.$isDark ? '#98BB6C' : '#6f894e'}; }
+    .hljs-keyword { color: ${props => props.$isDark ? '#938AA9' : '#b35b79'}; }
+    .hljs-function { color: ${props => props.$isDark ? '#7FB4CA' : '#4d699b'}; }
+    .hljs-title { color: ${props => props.$isDark ? '#7FB4CA' : '#4d699b'}; }
+    .hljs-class { color: ${props => props.$isDark ? '#7AA89F' : '#597b75'}; }
+    .hljs-type { color: ${props => props.$isDark ? '#7AA89F' : '#597b75'}; }
+    .hljs-number { color: ${props => props.$isDark ? '#DCA561' : '#cc6d00'}; }
+    .hljs-built_in { color: ${props => props.$isDark ? '#E46876' : '#c84053'}; }
+    .hljs-literal { color: ${props => props.$isDark ? '#DCA561' : '#cc6d00'}; }
+    .hljs-params { color: ${props => props.$isDark ? '#C5C9C7' : '#545464'}; }
+    .hljs-attr { color: ${props => props.$isDark ? '#DCA561' : '#77713f'}; }
   }
 `;
 
