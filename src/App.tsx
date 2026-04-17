@@ -211,7 +211,7 @@ const HeaderClickable = styled.div`
 `;
 
 const Name = styled.h1<{ $isDark: boolean }>`
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 600;
   margin: 0;
   color: ${props => colorToken(props.$isDark, 'accent')};
@@ -235,7 +235,7 @@ const SocialIconsContainer = styled.div`
   justify-content: flex-start;
   gap: 16px;
   margin-top: 0;
-  padding-top: 16px;
+  padding-top: 10px;
   align-items: center;
   align-self: flex-start;
 
@@ -344,7 +344,7 @@ const Article = styled.article<{ $isDark: boolean }>`
     color: ${props => colorToken(props.$isDark, 'text')};
   }
   
-  a {
+  > div a {
     color: ${props => colorToken(props.$isDark, 'accent')};
     text-decoration: underline;
     
@@ -422,6 +422,21 @@ const ArticleDate = styled.div<{ $isDark: boolean }>`
   font-size: 14px;
   color: ${props => colorToken(props.$isDark, 'mutedText')};
   margin-bottom: 40px;
+`;
+
+const BackLink = styled.a<{ $isDark: boolean }>`
+  display: inline-block;
+  font-size: 14px;
+  color: ${props => colorToken(props.$isDark, 'mutedText')};
+  cursor: pointer;
+  margin-bottom: 16px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: ${props => colorToken(props.$isDark, 'accent')};
+    text-decoration: none;
+  }
 `;
 
 interface Post {
@@ -561,6 +576,7 @@ const App: React.FC = () => {
 
         {selectedPost ? (
           <Article $isDark={isDark}>
+            <BackLink $isDark={isDark} onClick={handleHomeClick}>‹ posts</BackLink>
             <h1>{selectedPost.title}</h1>
             <ArticleDate $isDark={isDark}>{selectedPost.date}</ArticleDate>
             <div dangerouslySetInnerHTML={{ __html: selectedPost.content }} />
